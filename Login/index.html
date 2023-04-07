@@ -79,19 +79,30 @@
 
           <div class="input-box">
             <span class="icon"><i class='bx bxs-phone'></i></span>
-            <input type="tel" required>
+            <input type="text" id="phone" name="phone" pattern="[0-9]*" required>
             <label>Phone number</label>
           </div>
 
           <div class="input-box">
             <span class="icon"><i class='bx bxs-lock' ></i></span>
-            <input type="password" required>
+            <input type="password" required class="password-input" tabindex="4">
             <label>Password</label>
+            <div class="password-error">
+              <span class="error-message">Your password must:</span>
+              <ul>
+                <li class="length">Be at least 8 characters long</li>
+                <li class="uppercase">Have at least one uppercase character</li>
+                <li class="lowercase">Have at least one lowercase character</li>
+                <li class="number">Have at least one number</li>
+              </ul>
+              <span class="tooltip">Please fix the password</span>
+            </div>
           </div>
 
+          
+
           <div class="remember-forgot">
-          <label><input type="checkbox">I agree to the terms & conditions</label>
-            <a href="#">Forgot password?</a>
+          <label><input type="checkbox" required>I agree to the terms & conditions</label>
           </div>
 
           <button type ="submit" class="btn">Sign In</button>
@@ -100,8 +111,8 @@
             <a href="#" class="login-link">Sign in</a></p>
           </div>
         </form>
-        <div id="error-message"></div>
       </div>
+      
     </div>
   </div>
 
