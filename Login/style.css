@@ -274,3 +274,46 @@ body {
   font-size: 14px;
   color: #ccc;
 }
+
+
+
+.checkerContainer .form-group.weak .passwordChecker {
+  color: rgb(239, 68, 68);
+  border: 2px solid rgb(239, 68, 68);
+}
+
+.checkerContainer .form-group.weak::before{
+    color: rgb(239, 68, 68);
+}
+
+.checkerContainer .form-group.medium .passwordChecker {
+  color: rgb(251, 191, 36);
+  border: 2px solid rgb(251, 191, 36);
+}
+
+.checkerContainer .form-group.medium::before{
+    color: rgb(251, 191, 36);
+}
+
+.checkerContainer .form-group.strong::before{
+    color: rgb(34, 197, 94);
+}
+
+.checkerContainer .message.weak {
+  color: rgb(239, 68, 68) !important;
+}
+
+.checkerContainer .message.medium {
+  color: rgb(251, 191, 36) !important;
+}
+
+.checkerContainer .form-group.strong .passwordChecker {
+  color: rgb(34, 197, 94);
+  border: 2px solid rgb(34, 197, 94);
+}
+
+.checkerContainer .message.strong {
+  color: rgb(34, 197, 94) !important;
+}
+
+
