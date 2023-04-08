@@ -186,12 +186,14 @@ body {
   right: 0;
   font-size: 19px;
 }
+
 .form-box .remember-forgot {
   font-size: 14.5px;
   font-weight: 500;
   margin: -15px 0 15px;
   display: flex;
   justify-content: space-between;
+  margin-top: 5px;
 }
 
 .remember-forgot label input {
