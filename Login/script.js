@@ -12,7 +12,7 @@ loginLink.addEventListener('click', () => {
     logregBox.classList.remove('active');
 });
 
-
+//Janek's code 
 function signIn() {
   // Get the values of the email and password fields
   var email = document.getElementById("floatingInput").value;
