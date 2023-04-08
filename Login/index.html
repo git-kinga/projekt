@@ -84,21 +84,17 @@
           </div>
 
           <div class="input-box">
-            <span class="icon"><i class='bx bxs-lock' ></i></span>
-            <input type="password" required class="password-input" tabindex="4">
-            <label>Password</label>
-            <div class="password-error">
-              <span class="error-message">Your password must:</span>
-              <ul>
-                <li class="length">Be at least 8 characters long</li>
-                <li class="uppercase">Have at least one uppercase character</li>
-                <li class="lowercase">Have at least one lowercase character</li>
-                <li class="number">Have at least one number</li>
-              </ul>
-              <span class="tooltip">Please fix the password</span>
+            <span class="icon"><i class='bx bxs-lock'></i></span>
+            <labe>Password</label>
+            <div class="checkerContainer">
+              <div class="form-group" data-placeholder="Password">
+                <input type="password" id="passwordChecker" required class="password-input" tabindex="4">
+                <span class='passTypeToggle' title="Show"><i class="fa-solid fa-eye"></i></span>
+              </div>
+              <div class="message"></div>
             </div>
           </div>
-
+          
           
 
           <div class="remember-forgot">
@@ -115,7 +111,7 @@
       
     </div>
   </div>
-
+  
 
   <script src="script.js"></script>
 </body>

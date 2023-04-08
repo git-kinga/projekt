@@ -244,41 +244,30 @@ body {
   color: #e4e4e4;
   text-decoration: underline;
 }
-.password-error {
-  display: none;
-  margin-top: 5px;
+.checkerContainer {
+  position: relative;
 }
 
-.password-error.active {
-  display: block;
+.checkerContainer .form-group input[type=password] {
+  padding-right: 30px;
 }
 
-.password-error .error-message {
+.checkerContainer .form-group .passTypeToggle {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  color: #ccc;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.checkerContainer .form-group .passTypeToggle:hover {
+  color: #fff;
+}
+
+.checkerContainer .message {
+  margin-top: 10px;
   font-size: 14px;
-  font-weight: bold;
-}
-
-.password-error ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.password-error li::before {
-  content: "\u2610 ";
-  font-size: 14px;
-}
-
-.password-error li.done::before {
-  content: "\u2611 ";
-}
-
-.password-error .tooltip {
-  display: none;
-  margin-left: 5px;
-  color: red;
-  font-size: 12px;
-}
-.password-error.active .tooltip {
-  display: inline;
+  color: #ccc;
 }
