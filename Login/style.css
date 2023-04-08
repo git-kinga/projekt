@@ -194,25 +194,26 @@ body {
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
-}
-
-.remember-forgot label input {
+  flex-direction: column; /* change to column /
+  align-items: flex-start; / add alignment to start */
+  }
+  
+  .remember-forgot label input {
   accent-color: #e4e4e4;
   margin-right: 3px;
-}
-
-.remember-forgot a { 
+  margin-bottom: 5px; /* add some bottom margin */
+  }
+  
+  .remember-forgot a {
   color: #e4e4e4;
   text-decoration: none;
   transition: 0.5s;
-}
-
-.remember-forgot a:hover {
+  }
+  
+  .remember-forgot a:hover {
   color: #e4e4e4;
   text-decoration: underline;
-
-}
-
+  }
 .btn {
   width: 100%;
   height: 45px;
