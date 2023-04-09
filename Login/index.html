@@ -79,19 +79,30 @@
 
           <div class="input-box">
             <span class="icon"><i class='bx bxs-phone'></i></span>
-            <input type="tel" required>
+            <input type="text" id="phone" name="phone" pattern="[0-9]*" required>
             <label>Phone number</label>
           </div>
 
           <div class="input-box">
-            <span class="icon"><i class='bx bxs-lock' ></i></span>
-            <input type="password" required>
-            <label>Password</label>
+            <span class="icon"><i class='bx bxs-lock'></i></span>
+            <labe>Password</label>
+            <div class="checkerContainer">
+              <div class="form-group" data-placeholder="Password">
+                <input type="password" id="passwordChecker" required class="password-input" tabindex="4">
+                <span class='passTypeToggle' title="Show"><i class="fa-solid fa-eye"></i></span>
+              </div>
+              <div class="message"></div>
+            </div>
           </div>
+          
+          
 
           <div class="remember-forgot">
-          <label><input type="checkbox">I agree to the terms & conditions</label>
-            <a href="#">Forgot password?</a>
+            <label>
+              <input type="checkbox" name="agree" id="agree" required>
+              <span>I agree to the terms &amp; conditions</span>
+            </label>
+            <a href="#">Read our terms &amp; conditions</a>
           </div>
 
           <button type ="submit" class="btn">Sign In</button>
@@ -100,11 +111,11 @@
             <a href="#" class="login-link">Sign in</a></p>
           </div>
         </form>
-        <div id="error-message"></div>
       </div>
+      
     </div>
   </div>
-
+  
 
   <script src="script.js"></script>
 </body>

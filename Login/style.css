@@ -24,83 +24,6 @@ body {
     z-index: 100;
 }
 
-.navbar a {
-  position: relative;
-  font-size: 16px;
-  color: #e4e4e4;
-  text-decoration: none;
-  font-weight: 500;
-  margin-right: 30px;
-
-}
-.navbar a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  width: 100%;
-  bottom: -6px;
-  height: 2px;
-  background: #e4e4e4;
-  border-radius:5px;
-  transform: translateY(10px);
-  opacity: 0;
-  transition: 0.5s;
-}
-
-.navbar a:hover::after {
-  transform: translateY(0px);
-  opacity: 1;
-}
-
-.search-bar {
-    position: relative;
-    width: 300px;
-    height: 40px;
-    background: transparent;
-    border: 2px solid #e4e4e4;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-.search-bar input {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #e4e4e4;
-    font-size: 16px;
-    font-weight: 500;
-    padding-left: 10px;
-}
-
-.search-bar input::placeholder {
-    color: #e4e4e4;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.search-bar button {
-    width: 40px;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-    align-items: center;
-    cursor: pointer;
-}
-
-.search-bar button i {
-    font-size: 22px;
-    color: #e4e4e4;
-}
-
 .background{
   width: 100%;
   height: 100vh;
@@ -263,31 +186,34 @@ body {
   right: 0;
   font-size: 19px;
 }
+
 .form-box .remember-forgot {
   font-size: 14.5px;
   font-weight: 500;
   margin: -15px 0 15px;
   display: flex;
   justify-content: space-between;
-}
-
-.remember-forgot label input {
+  margin-top: 5px;
+  flex-direction: column; /* change to column /
+  align-items: flex-start; / add alignment to start */
+  }
+  
+  .remember-forgot label input {
   accent-color: #e4e4e4;
   margin-right: 3px;
-}
-
-.remember-forgot a { 
+  margin-bottom: 5px; /* add some bottom margin */
+  }
+  
+  .remember-forgot a {
   color: #e4e4e4;
   text-decoration: none;
   transition: 0.5s;
-}
-
-.remember-forgot a:hover {
+  }
+  
+  .remember-forgot a:hover {
   color: #e4e4e4;
   text-decoration: underline;
-
-}
-
+  }
 .btn {
   width: 100%;
   height: 45px;
@@ -321,9 +247,73 @@ body {
   color: #e4e4e4;
   text-decoration: underline;
 }
-
-#error-message {
-	color: red;
-	margin-top: 20px;
-	text-align: center;
+.checkerContainer {
+  position: relative;
 }
+
+.checkerContainer .form-group input[type=password] {
+  padding-right: 30px;
+}
+
+.checkerContainer .form-group .passTypeToggle {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  color: #ccc;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.checkerContainer .form-group .passTypeToggle:hover {
+  color: #fff;
+}
+
+.checkerContainer .message {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+
+
+.checkerContainer .form-group.weak .passwordChecker {
+  color: rgb(239, 68, 68);
+  border: 2px solid rgb(239, 68, 68);
+}
+
+.checkerContainer .form-group.weak::before{
+    color: rgb(239, 68, 68);
+}
+
+.checkerContainer .form-group.medium .passwordChecker {
+  color: rgb(251, 191, 36);
+  border: 2px solid rgb(251, 191, 36);
+}
+
+.checkerContainer .form-group.medium::before{
+    color: rgb(251, 191, 36);
+}
+
+.checkerContainer .form-group.strong::before{
+    color: rgb(34, 197, 94);
+}
+
+.checkerContainer .message.weak {
+  color: rgb(239, 68, 68) !important;
+}
+
+.checkerContainer .message.medium {
+  color: rgb(251, 191, 36) !important;
+}
+
+.checkerContainer .form-group.strong .passwordChecker {
+  color: rgb(34, 197, 94);
+  border: 2px solid rgb(34, 197, 94);
+}
+
+.checkerContainer .message.strong {
+  color: rgb(34, 197, 94) !important;
+}
+
+
