@@ -3,11 +3,17 @@ from django.core.validators import URLValidator
 from django.utils import timezone
 from .models import MonitorRequest
 
-class MonitorForm(forms.Form):
-    websiteURL = forms.CharField(label='Website URL', max_length=200)
-
-    def clean_websiteURL(self):
-        url = self.cleaned_data['websiteURL']
+class MonitorForm(forms.ModelForm):    
+    print("MonitorFomr")
+    class Meta:
+        model = MonitorRequest
+        fields = ['URL', 'interval', 'notification',]
+        widgets = {'interval':forms.Select(choices=((1, 1), (2, 2), (3, 3)))}
+        
+    
+    def clean_URL(self):
+        print("start clean")
+        url = self.cleaned_data['URL']
         validate_url = URLValidator()
         try:
             validate_url(url)
@@ -18,7 +24,7 @@ class MonitorForm(forms.Form):
         return url
     
     def save(self, user):
-        url = self.cleaned_data['websiteURL']
+        url = self.cleaned_data['URL']
         current_time = timezone.now()
         url_obj = MonitorRequest(user=user, URL=url, date=current_time)
         url_obj.save()

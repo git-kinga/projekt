@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django import forms
+from django.contrib import messages
 from .forms import MonitorForm
 
 def MonaApps(request):
@@ -14,20 +15,16 @@ def index(request):
 def form(request):
     if request.method == 'POST':
         form = MonitorForm(request.POST)
-        try:
-            print(form.is_valid())
-            if form.is_valid():
-                print("Inside if")
-                form.save(request.user)
-                return redirect('/')
-        except forms.ValidationError as e:
-            print("erorr views")
-            form.add_error('websiteURL', e.get_messages()[0])
-            return render(request, 'Monitoring_form.html', {'form':form})
-        else:
-            print("else")
+        print("after creating")
+        if form.is_valid():
+            print("Inside if")
+            form.save(request.user)
             return redirect('/')
-
+        else: 
+            print("erorr views")
+            for error in form.errors:
+                messages.error(request, MonitorForm.errors[error])
+            return redirect(request.path)
     else:
         form =MonitorForm()
     return render(request, 'Monitoring_form.html', {'form':form})
