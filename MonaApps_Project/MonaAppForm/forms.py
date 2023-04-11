@@ -4,7 +4,6 @@ from django.utils import timezone
 from .models import MonitorRequest
 
 class MonitorForm(forms.ModelForm):    
-    print("MonitorFomr")
     class Meta:
         model = MonitorRequest
         fields = ['URL', 'interval', 'notification',]
@@ -17,7 +16,6 @@ class MonitorForm(forms.ModelForm):
         
     
     def clean_URL(self):
-        print("start clean")
         url = self.cleaned_data['URL']
         validate_url = URLValidator()
         try:

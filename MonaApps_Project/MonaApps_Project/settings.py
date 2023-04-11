@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_bootstrap5',
     'MonaApps.apps.MonaappsConfig',
+    'MonaAppForm.apps.MonaappformConfig',
 ]
 
 MIDDLEWARE = [

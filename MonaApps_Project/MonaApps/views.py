@@ -3,31 +3,9 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.contrib import messages
-from .forms import MonitorForm
 
 def MonaApps(request):
     return HttpResponse("Hello world!")
 
 def index(request):
     return render(request, 'index.html')
-
-#@login_required
-def form(request):
-    if request.method == 'POST':
-        form = MonitorForm(request.POST)
-        print("after creating")
-        if form.is_valid():
-            print("Inside if")
-            form.save(request.user)
-            return redirect('/')
-        else: 
-            print("erorr views")
-            for field in form.errors:
-                print('errorField')
-                for error in form.errors[field]:
-                    messages.error(request, f'{field.capitalize()}: {error}', extra_tags='alert alert-danger')
-                    print("Error css")
-            return redirect(request.path)
-    else:
-        form =MonitorForm()
-    return render(request, 'Monitoring_form.html', {'form':form})

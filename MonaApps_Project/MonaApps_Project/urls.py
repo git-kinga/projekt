@@ -18,7 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('MonaApps.urls')),
-    path('form/', include('MonaApps.urls')),
-    path('admin/', admin.site.urls),
-
+    path('form/', include('MonaAppForm.urls')),
+    path('admin', admin.site.urls),
 ]
