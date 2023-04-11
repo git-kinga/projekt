@@ -9,6 +9,11 @@ class MonitorForm(forms.ModelForm):
         model = MonitorRequest
         fields = ['URL', 'interval', 'notification',]
         widgets = {'interval':forms.Select(choices=((1, 1), (2, 2), (3, 3)))}
+        labels = {
+            'URL':'Monitor to service',
+            'interval':'Interval',
+            'notification':'Get an email notification if the service is not available'
+        }
         
     
     def clean_URL(self):

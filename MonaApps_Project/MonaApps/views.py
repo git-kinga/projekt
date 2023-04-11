@@ -22,8 +22,11 @@ def form(request):
             return redirect('/')
         else: 
             print("erorr views")
-            for error in form.errors:
-                messages.error(request, MonitorForm.errors[error])
+            for field in form.errors:
+                print('errorField')
+                for error in form.errors[field]:
+                    messages.error(request, f'{field.capitalize()}: {error}', extra_tags='alert alert-danger')
+                    print("Error css")
             return redirect(request.path)
     else:
         form =MonitorForm()
