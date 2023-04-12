@@ -10,4 +10,4 @@ class MonitorRequest(models.Model):
     date = models.DateTimeField()
 
     def __str__(self):
-        return self.URL
+        return f'URL: {self.URL} User: {self.user}'
