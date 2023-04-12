@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login test page</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
@@ -50,74 +50,39 @@
 
           <div class="remember-forgot">
           <label><input type="checkbox">Remember me</label>
-            <a href="#">Forgot password?</a>
+            <a href="#" class="forgot-link">Forgot password?</a>
           </div>
 
           <button type ="submit" class="btn">Sign In</button>
          
           <div class="login-register"><p>Don't have an account?
-            <a href="#" class="register-link">Sign up</a></p>
+            <a href="registeration.html" class="register-link">Sign up</a></p>
           </div>
         </form>
       </div>
 
-      <div class="form-box register">
+      <div class="form-box forgot">
         <form action="#">
-          <h2>Register</h2>
+          <h2>Forgot password</h2>
+          <p>Enter your email to reset your password</p>
 
           <div class="input-box">
-            <span class="icon"><i class='bx bxs-user' ></i></span>
-            <input type="text" required>
-            <label>Name</label>
-          </div>
-
-          <div class="input-box">
+            <input type="email" class="passInput"  required>
             <span class="icon"><i class='bx bxs-envelope' ></i></span>
-            <input type="email" required>
             <label>Email</label>
           </div>
-
-          <div class="input-box">
-            <span class="icon"><i class='bx bxs-phone'></i></span>
-            <input type="text" id="phone" name="phone" pattern="[0-9]*" required>
-            <label>Phone number</label>
-          </div>
-
-          <div class="input-box">
-            <span class="icon"><i class='bx bxs-lock'></i></span>
-            <labe>Password</label>
-            <div class="checkerContainer">
-              <div class="form-group" data-placeholder="Password">
-                <input type="password" id="passwordChecker" required class="password-input" tabindex="4">
-                <span class='passTypeToggle' title="Show"><i class="fa-solid fa-eye"></i></span>
-              </div>
-              <div class="message"></div>
-            </div>
-          </div>
-          
-          
-
-          <div class="remember-forgot">
-            <label>
-              <input type="checkbox" name="agree" id="agree" required>
-              <span>I agree to the terms &amp; conditions</span>
-            </label>
-            <a href="#">Read our terms &amp; conditions</a>
-          </div>
-
-          <button type ="submit" class="btn">Sign In</button>
-         
+          <button type ="submit" class="btn">Send my password</button>
           <div class="login-register"><p>Already have an account?
             <a href="#" class="login-link">Sign in</a></p>
           </div>
-        </form>
+          </form>
       </div>
       
     </div>
   </div>
   
 
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>
