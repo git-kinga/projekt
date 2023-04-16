@@ -7,7 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register test page</title>
-  <link rel="stylesheet" href="css/reg-style.css">
+  {% load static %}
+  <link rel="stylesheet" href="{%static 'css/reg-style.css' %}">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
@@ -66,7 +67,7 @@
             </form>
           </div>
         </div>
-        <script src="js/reg-script.js"></script>
+        <script src="{%static 'js/reg-script.js' %}"></script>
     </div>
   </div>
 </body>
