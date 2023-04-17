@@ -84,7 +84,7 @@ body {
 .background{
   width: 100%;
   height: 100vh;
-  background: url('JIDENQ.jpg') no-repeat;
+  background: url('../pictures/JIDENQ.jpg') no-repeat;
   background-size: cover;
   background-position: center;
   filter: blur(10px);
