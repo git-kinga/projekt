@@ -1,98 +1,37 @@
-//phone number only
-var phoneInput = document.getElementById('phone');
-phoneInput.addEventListener('keydown', function(event) {
-  if (isNaN(Number(event.key))) {
-    event.preventDefault();
-  }
+// Get the form element
+const form = document.querySelector('form');
+
+// Attach an event listener to the form's submit event
+form.addEventListener('submit', (event) => {
+  // Prevent the default form submission behavior
+  event.preventDefault();
+
+  // Get the values of the email and password fields
+  const name = document.querySelector('input[type="name"]').value;
+  const email = document.querySelector('input[type="email"]').value;
+  const password = document.querySelector('input[type="password"]').value;
+  const password2 = document.querySelector('input[type="password2"]').value;
+  const checkbox = document.querySelector('input[type="checkbox"]').value;name
+	
+  // Create a new FormData object and add the email and password values to it
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('email', email);
+  formData.append('password', password);
+  formData.append('password2', password2);
+  formData.append('checkbox', checkbox);
+
+  // Send a POST request to the server with the form data
+  fetch('/login', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    // Handle the response from the server
+    console.log(response);
+  })
+  .catch(error => {
+    // Handle any errors that occur during the fetch request
+    console.error(error);
+  });
 });
-
-// password requierments for register
-let input = document.querySelector('#passwordChecker')
-let formGroup = document.querySelector('.form-group')
-let message = document.querySelector('.message')
-let passTypeToggle = document.querySelector('.passTypeToggle')
-let strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})')
-let mediumPassword = new RegExp('((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))')
-
-document.body.addEventListener('click', function (e) {
-    if (input.contains(e.target)) {
-        formGroup.classList.add('focus')
-    } else {
-        if(input.value == ''){
-            formGroup.classList.remove('focus')
-        }
-    }
-});
-
-let checkPasswordStrength = (password) => {
-    let message = {}
-
-    if(strongPassword.test(password)) {
-        message = {
-            strength : 'strong'
-        }
-    } else if(mediumPassword.test(password)) {
-        message = {
-            strength : 'medium'
-        }
-    } else {
-        message = {
-            strength : 'weak'
-        }
-    }
-    return message
-}
-
-input.addEventListener('keyup', e => {
-    let password = e.target.value
-
-    password != "" ? passTypeToggle.style.display = 'block' : passTypeToggle.style.display = 'none'
-
-    if(password == ''){
-        message.classList.remove('weak')
-        message.classList.remove('medium')
-        message.classList.remove('strong')
-
-        formGroup.classList.remove('weak')
-        formGroup.classList.remove('medium')
-        formGroup.classList.remove('strong')
-
-        message.innerHTML = ''
-    }else{
-        let result = checkPasswordStrength(password)
-
-        if(result.strength == 'weak'){
-            message.classList.remove('medium')
-            message.classList.remove('strong')
-            formGroup.classList.remove('medium')
-            formGroup.classList.remove('strong')
-            message.classList.add('weak')
-            formGroup.classList.add('weak')
-            message.innerHTML = 'Your Password is weak.'
-        }else if(result.strength == 'medium'){
-            formGroup.classList.remove('weak')
-            formGroup.classList.remove('strong')
-            message.classList.remove('weak')
-            message.classList.remove('strong')
-            message.classList.add('medium')
-            formGroup.classList.add('medium')
-            message.innerHTML = 'Your Password is medium.'
-        }else{
-            formGroup.classList.remove('weak')
-            formGroup.classList.remove('medium')
-            message.classList.remove('weak')
-            message.classList.remove('medium')
-            message.classList.add('strong')
-            formGroup.classList.add('strong')
-            message.innerHTML = 'Your Password is Strong.'
-        }
-    }
-
-})
-
-passTypeToggle.addEventListener('click', e => {
-    input.getAttribute('type') == 'password' ? input.setAttribute('type', 'text') : input.setAttribute('type', 'password')
-    input.getAttribute('type') == 'password' ? passTypeToggle.setAttribute('title', 'Show') : passTypeToggle.setAttribute('title', 'Hide')
-    document.querySelector('.passTypeToggle i').classList.toggle('fa-eye')
-    document.querySelector('.passTypeToggle i').classList.toggle('fa-eye-slash')
-})

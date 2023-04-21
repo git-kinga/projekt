@@ -1,45 +1,33 @@
-const logregBox = document.querySelector('.logreg-box');
-const loginLink = document.querySelector('.login-link');
-const registerLink = document.querySelector('.register-link');
-const forgotLink = document.querySelector('.forgot-link');
+// Get the form element
+const form = document.querySelector('form');
 
+// Attach an event listener to the form's submit event
+form.addEventListener('submit', (event) => {
+  // Prevent the default form submission behavior
+  event.preventDefault();
 
-// To toggle between login and register
-forgotLink.addEventListener('click', () => {
-    logregBox.classList.add('active');
-});
-
-loginLink.addEventListener('click', () => {
-    logregBox.classList.remove('active');
-});
-
-//Janek's code 
-function signIn() {
   // Get the values of the email and password fields
-  var email = document.getElementById("floatingInput").value;
-  var password = document.getElementById("floatingPassword").value;
+  const email = document.querySelector('input[type="email"]').value;
+  const password = document.querySelector('input[type="password"]').value;
+  const checkbox = document.querySelector('input[type="checkbox"]').value;
+	
+  // Create a new FormData object and add the email and password values to it
+  const formData = new FormData();
+  formData.append('email', email);
+  formData.append('password', password);
+  formData.append('checkbox', checkbox);
 
-  // Create an object with the email and password
-  var credentials = {
-    email: email,
-    password: password
-  };
-
-  // Send a POST request with the credentials in JSON format
-  fetch('/api/signin', {
+  // Send a POST request to the server with the form data
+  fetch('/login', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
+    body: formData
   })
   .then(response => {
     // Handle the response from the server
-    // For example, you can redirect the user to another page
-    window.location.href = '/dashboard';
+    console.log(response);
   })
   .catch(error => {
-    // Handle the error
-    console.error('Error:', error);
+    // Handle any errors that occur during the fetch request
+    console.error(error);
   });
-}
+});
