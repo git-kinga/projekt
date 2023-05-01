@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,70 +8,80 @@
   <title>Login test page</title>
   <link rel="stylesheet" href="../static/css/style.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-<<<<<<< Updated upstream
-  
-=======
->>>>>>> Stashed changes
+  <<<<<<< Updated upstream=======>>>>>>> Stashed changes
 </head>
 
-<body> 
+<body>
   <div class="background"></div>
   <div class="container">
     <div class="content">
-      <h2 class="logo"><i><i class='bx bx-desktop'></i></i></i> Samsung</h2> 
+      <h2 class="logo"><i><i class='bx bx-desktop'></i></i></i> Samsung</h2>
     </div>
 
     <div class="logreg-box">
       <div class="form-box login">
-        <form action="#">
+        {% if error_message %}
+        <div class="alert alert-danger">
+          {{ error_message }}
+        </div>
+        {% endif %}
+        {% block content %}
+        <form action="#" method="post">
+          {% csrf_token %}
           <h2>Sign In</h2>
 
           <div class="input-box">
-            <span class="icon"><i class='bx bxs-envelope' ></i></span>
-            <input type="email" required>
-            <label>Email</label>
+            <span class="icon"><i class='bx bxs-envelope'></i></span>
+            {{ form.username }}
+            <label>Username</label>
           </div>
 
           <div class="input-box">
-            <span class="icon"><i class='bx bxs-lock' ></i></span>
-            <input type="password" required>
+            <span class="icon"><i class='bx bxs-lock'></i></span>
+            {{ form.password }}
             <label>Password</label>
           </div>
 
           <div class="remember-forgot">
-          <label><input type="checkbox">Remember me</label>
+            <label><input type="checkbox">Remember me</label>
             <a href="#" class="forgot-link">Forgot password?</a>
           </div>
 
-          <button type ="submit" class="btn">Sign In</button>
-          <script src="../static/js/script.js"></script>
-          <div class="login-register"><p>Don't have an account?
-            <a href="registeration.html" class="register-link">Sign up</a></p>
+          <button type="submit" class="btn">Sign In</button>
+          {% endblock %}
+          <!-- <script src="../static/js/script.js"></script> -->
+          <div class="login-register">
+            <p>Don't have an account?
+              <a href="registration.html" class="register-link">Sign up</a>
+            </p>
           </div>
         </form>
       </div>
 
       <div class="form-box forgot">
-        <form action="#">
+        <form action="#" method="post">
+          {% csrf_token %}
           <h2>Forgot password</h2>
           <p>Enter your email to reset your password</p>
 
           <div class="input-box">
-            <input type="email"  id="floatingInput" class="passInput"  required>
-            <span class="icon"><i class='bx bxs-envelope' ></i></span>
+            <input type="email" id="floatingInput" class="passInput" required>
+            <span class="icon"><i class='bx bxs-envelope'></i></span>
             <label>Email</label>
           </div>
-          <button type ="submit"  id="floatingPassword" class="btn">Send my password</button>
-		  <script src="../static/js/script.js"></script>
-          <div class="login-register"><p>Already have an account?
-            <a href="#" class="login-link">Sign in</a></p>
+          <button type="submit" id="floatingPassword" class="btn">Send my password</button>
+          <!-- <script src="../static/js/script.js"></script> -->
+          <div class="login-register">
+            <p>Already have an account?
+              <a href="#" class="login-link">Sign in</a>
+            </p>
           </div>
-          </form>
+        </form>
       </div>
-      
+
     </div>
   </div>
-  <script src="../static/js/script.js"></script>
+  <!-- <script src="../static/js/script.js"></script> -->
 </body>
 
 </html>

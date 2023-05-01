@@ -18,7 +18,7 @@ form.addEventListener('submit', (event) => {
   formData.append('checkbox', checkbox);
 
   // Send a POST request to the server with the form data
-  fetch('/login', {
+  fetch('/login/', {
     method: 'POST',
     body: formData
   })
