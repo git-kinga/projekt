@@ -75,8 +75,40 @@ function checkPasswordStrength() {
   passwordInput.style.borderColor = strengthColor[strengthValue];
 }
 
-
-
+///toggle password
+let eyeicon = document.getElementById("eyeicon");
+let sineyeicon = document.getElementById("sineyeicon");
+let coneyeicon = document.getElementById("coneyeicon");
+let password = document.getElementById("password");
+let conpassword = document.getElementById("conpassword");
+let signinpassword = document.getElementById("signinpassword");
+eyeicon.onclick = function(){
+    if(password.type === "password"){
+        password.type = "text";
+        eyeicon.src ="../static/images/eye-open.png"
+    }else{
+        password.type = "password";
+        eyeicon.src ="../static/images/eye-close.png"
+    }
+  }
+coneyeicon.onclick = function(){
+    if(conpassword.type === "password"){
+        conpassword.type = "text";
+        coneyeicon.src ="../static/images/eye-open.png"
+    }else{
+        conpassword.type = "password";
+        coneyeicon.src ="../static/images/eye-close.png"
+    }
+  }
+ sineyeicon.onclick = function(){
+    if(signinpassword.type === "password"){
+        signinpassword.type = "text";
+        sineyeicon.src ="../static/images/eye-open.png"
+    }else{
+        signinpassword.type = "password";
+        sineyeicon.src ="../static/images/eye-close.png"
+    }
+}
 // Get the form element
 const form= document.querySelector('form-group');
 
@@ -96,7 +128,6 @@ form.addEventListener('submit', (event) => {
   const formData = new FormData();
   formData.append('name', name);
   formData.append('email', email);
-  formData.append('password', password);
   formData.append('password', password);
   formData.append('checkbox', checkbox);
 
