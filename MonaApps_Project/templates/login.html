@@ -1,4 +1,4 @@
-
+<
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,68 +9,67 @@
   <title>Login test page</title>
   <link rel="stylesheet" href="../static/css/style.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-<<<<<<< Updated upstream
   
-=======
->>>>>>> Stashed changes
 </head>
-
 <body> 
   <div class="background"></div>
-  <div class="container">
-    <div class="content">
-      <h2 class="logo"><i><i class='bx bx-desktop'></i></i></i> Samsung</h2> 
-    </div>
-
-    <div class="logreg-box">
-      <div class="form-box login">
-        <form action="#">
-          <h2>Sign In</h2>
-
-          <div class="input-box">
-            <span class="icon"><i class='bx bxs-envelope' ></i></span>
-            <input type="email" required>
-            <label>Email</label>
-          </div>
-
-          <div class="input-box">
-            <span class="icon"><i class='bx bxs-lock' ></i></span>
-            <input type="password" required>
-            <label>Password</label>
-          </div>
-
-          <div class="remember-forgot">
-          <label><input type="checkbox">Remember me</label>
-            <a href="#" class="forgot-link">Forgot password?</a>
-          </div>
-
-          <button type ="submit" class="btn">Sign In</button>
-          <script src="../static/js/script.js"></script>
-          <div class="login-register"><p>Don't have an account?
-            <a href="registeration.html" class="register-link">Sign up</a></p>
-          </div>
-        </form>
+  <div class="wrapper">
+      <div class="headline">
+          <h1>Welcome</h1>
       </div>
-
-      <div class="form-box forgot">
-        <form action="#">
-          <h2>Forgot password</h2>
-          <p>Enter your email to reset your password</p>
-
-          <div class="input-box">
-            <input type="email"  id="floatingInput" class="passInput"  required>
-            <span class="icon"><i class='bx bxs-envelope' ></i></span>
-            <label>Email</label>
+      <form class="form" method="post" action="#">
+         <div class="signup">
+             <div class="form-group">
+                 <input type="text" placeholder="Full name" required="">
+             </div>
+             <div class="form-group">
+                 <input type="email" placeholder="Email" required="">
+             </div>
+             <div class="form-group">
+                 <input type="password" placeholder="Password" required="">
+                 <span class="password-strength"></span>
+                 
+             </div>
+             <div class="form-group">
+              <input type="password" placeholder="Confirm Password" required="">
+              
+             </div>
+             <button type="submit" id="floatingPassword" class="btn">SIGN UP</button>
+             <div class="account-exist">
+                 Already have an account? <a href="#" id="login">Login</a>
+             </div>
+         </div>
+         <div class="signin"> 
+             <div class="form-group">
+                 <input type="email" placeholder="Email" required="">
+             </div>
+             <div class="form-group">
+                 <input type="password" placeholder="Password" required="">
+                 
+             </div>
+             <div class="forget-password">
+                 <div class="check-box">
+                     <input type="checkbox" id="checkbox">
+                     <label for="checkbox">Remember me</label>
+                 </div>
+                 <a href="#" id="forgot">Forget password?</a>
+             </div>
+             <button type="submit" id="floatingPassword" class="btn">LOGIN</button>
+             <div class="account-exist">
+                 Create New a account? <a href="#" id="signup">Signup</a>
+             </div>
+         </div>
+         <div class="forget">
+            <div class="form-group">
+              <input type="email" placeholder="Email" required="">
+            </div>
+            <button type="submit" id="floatingPassword" class="btn">SEND</button>
+            <div class="account-exist">
+              <a href="#" id="back">Back</a>
+            </div>
           </div>
-          <button type ="submit"  id="floatingPassword" class="btn">Send my password</button>
-		  <script src="../static/js/script.js"></script>
-          <div class="login-register"><p>Already have an account?
-            <a href="#" class="login-link">Sign in</a></p>
-          </div>
-          </form>
-      </div>
       
-    </div>
+      </form>
   </div>
   <script src="../static/js/script.js"></script>
 </body>
