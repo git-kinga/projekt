@@ -1,3 +1,4 @@
+// DO NOT DELETE - toggle for 
 let btnLogin = document.getElementById("login");
 let btnSignUp = document.getElementById("signup");
 let btnForgot = document.getElementById("forgot");

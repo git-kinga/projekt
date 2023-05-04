@@ -26,19 +26,19 @@
               <div class="position-sticky pt-3 sidebar-sticky">
                 <ul class="nav flex-column">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="Dashboard.html">
+                    <a class="nav-link active" aria-current="page" href="#" onclick="showDashboard()">
                       <span data-feather="home" class="align-text-bottom"></span>
                       Dashboard
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="Monitoring.html">
+                    <a class="nav-link" aria-current="page" href="#" onclick="showMonitoring()">
                       <span data-feather="file" class="align-text-bottom"></span>
                       Monitoring
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="Monitoring_form.html">
+                    <a class="nav-link" href="#" onclick="showMonitoringForm()">
                       <span data-feather="shopping-cart" class="align-text-bottom"></span>
                       Add a new monitoring service
                     </a>
@@ -52,25 +52,25 @@
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a class="nav-link" href="Saved_reports.html">
+                        <a class="nav-link" href="#" onclick="showSavedReport()">
                           <span data-feather="bar-chart-2" class="align-text-bottom"></span>
                           Saved reports
                         </a>
                       </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="Current_week.html">
+                    <a class="nav-link" href="#" onclick="showCurrentWeek()">
                       <span data-feather="file-text" class="align-text-bottom"></span>
                       Current week
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="Current_month.html">
+                    <a class="nav-link" href="#" onclick="showCurrentMonth()">
                       <span data-feather="file-text" class="align-text-bottom"></span>
                       Current month
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="Monitoring_costs.html">
+                    <a class="nav-link" href="#" onclick="showMonitoringCost()">
                       <span data-feather="file-text" class="align-text-bottom"></span>
                       Monitoring costs
                     </a>
@@ -84,13 +84,13 @@
                   </h6>
                 <ul class="nav flex-column mb-2">
                   <li class="nav-item">
-                    <a class="nav-link" href="Telegraf_plugin.html">
+                    <a class="nav-link" href="#" onclick="showTelegraf()">
                       <span data-feather="file-text" class="align-text-bottom"></span>
                       Download monitoring agent
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="Earned_points.html">
+                    <a class="nav-link" href="#" onclick="showEarnedpoint()">
                       <span data-feather="file-text" class="align-text-bottom"></span>
                       Earned points
                     </a>
@@ -99,7 +99,8 @@
               </div>
             </nav>      
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <!--dashboard section-->
+              <section id="dashboard"><div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Dashboard</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                   <div class="btn-group me-2">
@@ -111,8 +112,155 @@
                     This week
                   </button>
                 </div>
-              </div>       
+              </div></section>
+        <!--monitoring section-->
+              <section id="monitoring" style="display:none"><div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Monitoring</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                  <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                    <span data-feather="calendar" class="align-text-bottom"></span>
+                    This week
+                  </button>
+                </div>
+              </div></section>
+         <!--add a new monitoring service section-->
+              <section id="monitoring_form" style="display:none">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2">Add a new monitoring service</h1>
+                  <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                      <span data-feather="calendar" class="align-text-bottom"></span>
+                      This week
+                    </button>
+                  </div>
+                </div>     
+                <form>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Service to monitor</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Monitoring interval</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Get an email notification if the service is not available</label>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </section> 
+          <!--saved report section--> 
+              <section id="savedreport" style="display:none">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2">Saved reports</h1>
+                  <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                      <span data-feather="calendar" class="align-text-bottom"></span>
+                      This week
+                    </button>
+                  </div>
+                </div> 
+              </section>
+              <!--current week section-->
+              <section id="currentweek" style="display:none">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2">Current week</h1>
+                  <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                      <span data-feather="calendar" class="align-text-bottom"></span>
+                      This week
+                    </button>
+                  </div>
+                </div>
+              </section>
+              <!--current month section-->     
+              <section id="currentmonth" style="display:none">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2">Current month</h1>
+                  <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                      <span data-feather="calendar" class="align-text-bottom"></span>
+                      This week
+                    </button>
+                  </div>
+                </div>
+              </section>
+            <!--monitoring cost section-->
+              <section id="monitoringcost" style="display:none">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2">Monitoring costs</h1>
+                  <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                      <span data-feather="calendar" class="align-text-bottom"></span>
+                      This week
+                    </button>
+                  </div>
+                </div> 
+              </section>
+              <!--Earned POints section-->
+              <section id="earnedpoint" style="display:none">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2">Earned points</h1>
+                  <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                      <span data-feather="calendar" class="align-text-bottom"></span>
+                      This week
+                    </button>
+                  </div>
+                </div> 
+              </section>  
+              <!--telegraf plugin-->
+              <section id="telegraf" style="display:none">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2">Download monitoring agent</h1>
+                  <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                      <span data-feather="calendar" class="align-text-bottom"></span>
+                      This week
+                    </button>
+                  </div>
+                </div>   
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary" type="button">Download monitoring agent for Windows</button>
+                  <button class="btn btn-primary" type="button">Download monitoring agent for Linux</button>
+                  <button class="btn btn-primary" type="button">Download monitoring agent for MacOS</button>
+                </div>
+              </section>
             </main>
           </div>
+        
 </body>
 </html>

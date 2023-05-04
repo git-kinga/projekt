@@ -31,7 +31,8 @@ body{
     max-width:668px;
     width:100%;
     margin:auto;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.5);
+    
     
 }
 .wrapper::before{
@@ -41,13 +42,12 @@ body{
     left:0;
     right:0;
     bottom:0;
-    background: url('../images/background.jpg') no-repeat;
+    background-image: url('../images/background.jpg');
     background-position: center center;
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     min-height: 100vh;
     z-index: -1;
-    
 }
 .wrapper .headline{
     text-align: center;
@@ -88,6 +88,7 @@ body{
     height:48px;
     border-radius: 5px;
     padding: 11px 15px;
+    border:1px solid #e4e8ee;
     margin: 15px auto;
     align-items: center;
     display: flex;
@@ -138,6 +139,7 @@ body{
     border-top:1px solid var(--white-color);
     padding-top:20px;
     text-align: center;
+    padding-bottom: 20px;
 }
 .wrapper .account-exist a{
     color:var(--primary-color);
@@ -175,7 +177,7 @@ body{
 }
 
 .password-strength {
-  display: inline-block;
+  display: flex;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   font-size: 0.75rem;
@@ -228,6 +230,13 @@ input[type="password"]:focus {
 @media (max-width:767px){
     .wrapper{
         max-width: 550px;
+        background-image: url('../images/background.jpg');
+        background-position: center center;
+        background-size: cover;
+        background-repeat: repeat-y;
+        min-height: 100vh;
+        z-index: -1;
+
     }
     .wrapper .headline h1{
         font-size: 22px;

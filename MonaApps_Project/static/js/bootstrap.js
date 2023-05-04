@@ -5247,3 +5247,107 @@
 
 }));
 //# sourceMappingURL=bootstrap.js.map
+
+//=========================================================
+//swich between pages
+
+function showDashboard() {
+  document.getElementById("dashboard").style.display = "block";
+  document.getElementById("monitoring").style.display = "none";
+  document.getElementById("monitoring_form").style.display = "none";
+  document.getElementById("savedreport").style.display = "none";
+  document.getElementById("currentmonth").style.display = "none";
+  document.getElementById("currentweek").style.display = "none";
+  document.getElementById("monitoringcost").style.display = "none";
+  document.getElementById("earnedpoint").style.display = "none";
+  document.getElementById("telegraf").style.display = "none";
+}
+
+function showMonitoring() {
+  document.getElementById("dashboard").style.display = "none";
+  document.getElementById("monitoring_form").style.display = "none";
+  document.getElementById("monitoring").style.display = "block";
+  document.getElementById("savedreport").style.display = "none";
+  document.getElementById("currentmonth").style.display = "none";
+  document.getElementById("currentweek").style.display = "none";
+  document.getElementById("monitoringcost").style.display = "none";
+  document.getElementById("earnedpoint").style.display = "none";
+  document.getElementById("telegraf").style.display = "none";
+}
+function showMonitoringForm() {
+  document.getElementById("dashboard").style.display = "none";
+  document.getElementById("monitoring").style.display = "none";
+  document.getElementById("monitoring_form").style.display = "block";
+  document.getElementById("savedreport").style.display = "none";
+  document.getElementById("currentmonth").style.display = "none";
+  document.getElementById("currentweek").style.display = "none";
+  document.getElementById("monitoringcost").style.display = "none";
+  document.getElementById("earnedpoint").style.display = "none";
+  document.getElementById("telegraf").style.display = "none";
+}
+function showSavedReport(){
+  document.getElementById("dashboard").style.display = "none";
+  document.getElementById("monitoring").style.display = "none";
+  document.getElementById("monitoring_form").style.display = "none";
+  document.getElementById("savedreport").style.display = "block";
+  document.getElementById("currentmonth").style.display = "none";
+  document.getElementById("currentweek").style.display = "none";
+  document.getElementById("monitoringcost").style.display = "none";
+  document.getElementById("earnedpoint").style.display = "none";
+  document.getElementById("telegraf").style.display = "none";
+}
+function showCurrentMonth(){
+  document.getElementById("dashboard").style.display = "none";
+  document.getElementById("monitoring").style.display = "none";
+  document.getElementById("monitoring_form").style.display = "none";
+  document.getElementById("savedreport").style.display = "none";
+  document.getElementById("currentmonth").style.display = "block";
+  document.getElementById("currentweek").style.display = "none";
+  document.getElementById("monitoringcost").style.display = "none";
+  document.getElementById("earnedpoint").style.display = "none";
+  document.getElementById("telegraf").style.display = "none";
+}
+function showCurrentWeek(){
+  document.getElementById("dashboard").style.display = "none";
+  document.getElementById("monitoring").style.display = "none";
+  document.getElementById("monitoring_form").style.display = "none";
+  document.getElementById("savedreport").style.display = "none";
+  document.getElementById("currentmonth").style.display = "none";
+  document.getElementById("currentweek").style.display = "block";
+  document.getElementById("monitoringcost").style.display = "none";
+  document.getElementById("earnedpoint").style.display = "none";
+  document.getElementById("telegraf").style.display = "none";
+}
+function showMonitoringCost(){
+  document.getElementById("dashboard").style.display = "none";
+  document.getElementById("monitoring").style.display = "none";
+  document.getElementById("monitoring_form").style.display = "none";
+  document.getElementById("savedreport").style.display = "none";
+  document.getElementById("currentmonth").style.display = "none";
+  document.getElementById("currentweek").style.display = "none";
+  document.getElementById("monitoringcost").style.display = "block";
+  document.getElementById("earnedpoint").style.display = "none";
+  document.getElementById("telegraf").style.display = "none";
+}
+function showEarnedpoint(){
+  document.getElementById("dashboard").style.display = "none";
+  document.getElementById("monitoring").style.display = "none";
+  document.getElementById("monitoring_form").style.display = "none";
+  document.getElementById("savedreport").style.display = "none";
+  document.getElementById("currentmonth").style.display = "none";
+  document.getElementById("currentweek").style.display = "none";
+  document.getElementById("monitoringcost").style.display = "none";
+  document.getElementById("earnedpoint").style.display = "block";
+  document.getElementById("telegraf").style.display = "none";
+}
+function showTelegraf(){
+  document.getElementById("dashboard").style.display = "none";
+  document.getElementById("monitoring").style.display = "none";
+  document.getElementById("monitoring_form").style.display = "none";
+  document.getElementById("savedreport").style.display = "none";
+  document.getElementById("currentmonth").style.display = "none";
+  document.getElementById("currentweek").style.display = "none";
+  document.getElementById("monitoringcost").style.display = "none";
+  document.getElementById("earnedpoint").style.display = "none";
+  document.getElementById("telegraf").style.display = "block";
+}
