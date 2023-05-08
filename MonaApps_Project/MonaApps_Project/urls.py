@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('MonaApps.urls')),
-    path('form/', include('MonaAppForm.urls')),
+    path('form/', include('MonaApps.urls')),
+    path('login/', include('MonaApps.urls')),
+    path('registration/', include('MonaApps.urls')),
+    path('admin/', admin.site.urls),
     
 ]
