@@ -110,6 +110,8 @@ coneyeicon.onclick = function(){
         sineyeicon.src ="../static/images/eye-close.png"
     }
 }
+
+//Janek's code?
 // Get the form element
 const form= document.querySelector('form-group');
 
