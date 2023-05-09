@@ -41,9 +41,11 @@ body{
 }
 .wrapper{
     padding:50px 25px 0;
-    max-width:668px;
+    max-width:880px;
     width:100%;
     margin:auto;
+    position: relative;
+    z-index: 1;
 }
 .wrapper::before{
     content:'';
@@ -81,7 +83,7 @@ body{
     position: relative;
     margin: 50px auto;
     padding: 30px;
-    max-width: 800px;
+    max-width: 500px;
     background-color: rgba(255, 255, 255, 0.6); 
     border-radius: 10px;
   }
@@ -139,6 +141,7 @@ body{
     border-radius: 5px;
     padding: 11px 15px;
     border:1px solid #e4e8ee;
+    outline: 1px;
     margin: 15px auto;
     align-items: center;
     display: flex;
@@ -284,7 +287,6 @@ input[type="password"]:focus {
         background-size: cover;
         background-repeat: repeat-y;
         min-height: 100vh;
-        z-index: -1;
 
     }
     .wrapper .headline h1{

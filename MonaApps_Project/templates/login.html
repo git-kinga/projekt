@@ -21,10 +21,10 @@
                  <input type="text" placeholder="Full name" required="">
              </div>
              <div class="form-group">
-                 <input type="email" placeholder="Email" required="">
+                 <input type="email" name="signup-email" placeholder="Email" required="">
              </div>
              <div class="input-box">
-                 <input type="password" placeholder="Password" id="password" required="">
+                 <input type="password" name="signup-password" placeholder="Password" id="password" required="">
                  <span class="password-strength"></span>
                  <img src="../static/images/eye-close.png" id="eyeicon">
                  
@@ -33,17 +33,17 @@
                 <input type="password" placeholder="Confirm Password" id="conpassword" required="">
                 <img src="../static/images/eye-close.png" id="coneyeicon">
              </div>
-             <button type="submit" id="floatingPassword" class="btn">SIGN UP</button>
+             <button type="submit" class="btn">SIGN UP</button>
              <div class="account-exist">
                  Already have an account? <a href="#" id="login">Login</a>
              </div>
          </div>
          <div class="signin"> 
              <div class="form-group">
-                 <input type="email" placeholder="Email" required="">
+                 <input type="email" name="signin-email" placeholder="Email" required="">
              </div>
              <div class="input-box">
-                 <input type="password" placeholder="Password" id="signinpassword" required="">
+                 <input type="password" name="signin-password" placeholder="Password" id="signinpassword" required="">
                  <img src="../static/images/eye-close.png" id="sineyeicon">
              </div>
              <div class="forget-password">
@@ -53,16 +53,16 @@
                  </div>
                  <a href="#" id="forgot">Forgot password?</a>
              </div>
-             <button type="submit" id="floatingPassword" class="btn">LOGIN</button>
+             <button type="submit" class="btn">LOGIN</button>
              <div class="account-exist">
                  Create New a account? <a href="#" id="signup">Signup</a>
              </div>
          </div>
          <div class="forget">
             <div class="form-group">
-              <input type="email" placeholder="Email" required="">
+              <input type="email" name="forget-email" placeholder="Email" required="">
             </div>
-            <button type="submit" id="floatingPassword" class="btn">SEND</button>
+            <button type="submit" class="btn">SEND</button>
             <div class="account-exist">
               <a href="#" id="back">Back</a>
             </div>
