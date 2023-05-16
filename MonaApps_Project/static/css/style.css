@@ -210,23 +210,12 @@ body{
     font-size: 15px;
     color:var(--white-color);
 } 
-.signup.inActive{
-    display:none;
-}
-.signin{
-    display:none;
-}
-.signin.active{
-    display:block;
-}
-.forget.inActive {
+.forget {
   display: none;
 }
-.forget{
-  display:none;
-}
-.forget.active{
-  display:block;
+
+.signin {
+  display: block;
 }
 
 .password-strength {
