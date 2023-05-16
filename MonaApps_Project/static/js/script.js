@@ -1,19 +1,21 @@
-const loginDiv = document.getElementById('login');
-    const forgetDiv = document.getElementById('forget');
-    const forgotLink = document.getElementById('forgot');
-    const backLink = document.getElementById('back');
+document.addEventListener('DOMContentLoaded', function () {
+  const loginDiv = document.getElementById('login');
+  const forgetDiv = document.getElementById('forget');
+  const forgotLink = document.getElementById('forgot');
+  const backLink = document.getElementById('back');
 
-    forgotLink.addEventListener('click', function (event) {
-      event.preventDefault();
-      loginDiv.style.display = 'none';
-      forgetDiv.style.display = 'block';
-    });
+  forgotLink.addEventListener('click', function (event) {
+    event.preventDefault();
+    loginDiv.style.display = 'none';
+    forgetDiv.style.display = 'block';
+  });
 
-    backLink.addEventListener('click', function (event) {
-      event.preventDefault();
-      loginDiv.style.display = 'block';
-      forgetDiv.style.display = 'none';
-    });
+  backLink.addEventListener('click', function (event) {
+    event.preventDefault();
+    loginDiv.style.display = 'block';
+    forgetDiv.style.display = 'none';
+  });
+});
 
 //confirm password
 const passwordField = document.querySelector('input[type="password"]');
