@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from .forms import LoginForm, RegistrationForm
+from django.http import JsonResponse
+from .models import URL
+
 
 def MonaApps(request):
     return HttpResponse(request,"Hello world!")
@@ -52,3 +55,6 @@ def registration(request):
 
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+def api_config(request):
+    return JsonResponse({'url1': 'https://www.google.com/', 'url2': 'https://www.facebook.com/', 'url3': 'https://www.youtube.com/'})
