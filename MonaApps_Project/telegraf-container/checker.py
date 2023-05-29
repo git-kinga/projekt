@@ -24,6 +24,7 @@ class Agent:
             print("Error: Could not retrieve config")
             return
         for url in self.urls.values():
+            url = url if url.startswith('http') else 'http://' + url
             start_time = time.time()
             response = requests.get(url)
             response_time = time.time() - start_time

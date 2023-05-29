@@ -5,7 +5,7 @@ from django.contrib import messages
 from .forms import MonitorForm
 
 
-#@login_required
+@login_required
 def form(request):
     if request.method == 'POST':
         form = MonitorForm(request.POST)
@@ -13,9 +13,9 @@ def form(request):
         if form.is_valid():
             print("Inside if")
             form.save(request.user)
-            return redirect('/')
+            return redirect('../dashboard')
         else: 
-            print("erorr views")
+            print("error views")
             for field in form.errors:
                 print('errorField')
                 for error in form.errors[field]:
