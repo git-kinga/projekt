@@ -57,10 +57,5 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 def api_config(request):
-    
     items = MonitorRequest.objects.all()
-    urls_dict = {}
-    
-    
-    
     return JsonResponse({ item.id : item.URL for item in items})
