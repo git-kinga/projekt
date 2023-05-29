@@ -24,15 +24,19 @@ class Agent:
             print("Error: Could not retrieve config")
             return
         for url in self.urls.values():
-            url = url if url.startswith('http') else 'http://' + url
+            url = url if url.startswith('http') else 'https://' + url
             start_time = time.time()
-            response = requests.get(url)
-            response_time = time.time() - start_time
-            if response.status_code == 200:
-                print(f"{url} returned a 200 OK response after {response_time:.2f} seconds")
-            else:
-                print(f"{url} returned a {response.status_code} response after {response_time:.2f} seconds")
-            data[url]=response.status_code
+            try:
+                response = requests.get(url)
+                response_time = time.time() - start_time
+                if response.status_code == 200:
+                    print(f"{url} returned a 200 OK response after {response_time:.2f} seconds")
+                else:
+                    print(f"{url} returned a {response.status_code} response after {response_time:.2f} seconds")
+                    data[url]=response.status_code
+            except:
+                print(f"{url} Failed to establish a new connection")
+                data[url]='error'
         json_data=json.dumps(data)
         return json_data
 

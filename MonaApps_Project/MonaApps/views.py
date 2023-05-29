@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, RegistrationForm
 from django.http import JsonResponse
 #from .models import URL
@@ -10,11 +11,11 @@ from MonaAppForm.models import MonitorRequest
 def MonaApps(request):
     return HttpResponse(request,"Hello world!")
 
-def index(request):
-    return render(request, 'index.html')
+# def index(request):
+#     return render(request, 'index.html')
 
-def form(request):
-    return render(request, 'Monitoring_form.html')
+# def form(request):
+#     return render(request, 'Monitoring_form.html')
 
 
 def login(request):
@@ -50,8 +51,13 @@ def registration(request):
             user = form.save()
             print("### User created ###")
             auth_login(request, user)
-            return redirect('/login')
+            return redirect('/')
         return render(request, 'registration.html', {'form': form})
+
+@login_required
+def sign_out(request):
+    logout(request)
+    return redirect('/')
 
 def dashboard(request):
     return render(request, 'dashboard.html')

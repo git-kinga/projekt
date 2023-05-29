@@ -17,11 +17,16 @@ class MonitorForm(forms.ModelForm):
     
     def clean_URL(self):
         url = self.cleaned_data['URL']
-        validate_url = URLValidator(schemes=['http', 'https'])
-        if '://' not in url:
+        print(url)
+        new_url = None
+        if not url.startswith('http'):
+            print('here')
             new_url = 'http://' + url
+            print(new_url)
         try:
-            validate_url(new_url)
+            validate_url = URLValidator()
+            if new_url: validate_url(new_url) 
+            else: validate_url(url)
             print("Valid")
         except:
             print("Invalid")

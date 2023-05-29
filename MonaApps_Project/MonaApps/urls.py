@@ -8,6 +8,7 @@ urlpatterns = [
     #path('form/', views.form, name='form'),
     path('', views.login, name='login'),
     path('registration/', views.registration, name='registration'),
+    path('logout/', views.sign_out, name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('api/config/', views.api_config, name='api_config')
 ]
