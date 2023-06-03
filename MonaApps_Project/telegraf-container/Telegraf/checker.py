@@ -4,7 +4,7 @@ import json
 
 class Agent:
     def __init__(self):
-        self.config_pull_url = "http://127.0.0.1:8000/api/config"
+        self.config_pull_url = "http://host.docker.internal:8000/api/config/"
         # self.agent_id = input("Enter your agent ID: ")
         self.urls = []
         print('Init')
@@ -23,7 +23,7 @@ class Agent:
         line_protocol = '\n'.join([f'site_status,users_tag="tag-to-replace" url="{url}",status="{status}" {time.time_ns()+ind}' 
                                    for ind, (url, status) in enumerate(data.items())])
         
-        with open('output.dat', "w") as file:
+        with open('/app/output.txt', "w") as file:
             file.write(line_protocol)
         return True
         
@@ -55,9 +55,10 @@ class Agent:
 
 def main():
     agent = Agent()
-    print(agent.urls)
     json_data=agent.run()
     print(json_data)
+    return True
 
 if __name__ == "__main__":
     main()
+    

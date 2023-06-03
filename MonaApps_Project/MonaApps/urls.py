@@ -10,5 +10,7 @@ urlpatterns = [
     path('registration/', views.registration, name='registration'),
     path('logout/', views.sign_out, name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('api/config/', views.api_config, name='api_config')
+    #api/config/ only for debug (it will be remover)
+    path('api/config/', views.api_config_old, name='api_config_old'),
+    path('api/config/<str:user>', views.api_config, name='api_config'),
 ]

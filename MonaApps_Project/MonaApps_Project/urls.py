@@ -20,6 +20,5 @@ urlpatterns = [
     path('', include('MonaApps.urls')),
     path('form/', include('MonaAppForm.urls')),
     path('admin/', admin.site.urls),
-    path('api/config/', include('MonaApps.urls')),
     path('influx/', include('MonaAppsInfluxDB.urls')),
 ]

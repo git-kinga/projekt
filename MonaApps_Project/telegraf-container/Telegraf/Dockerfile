@@ -9,6 +9,7 @@ WORKDIR /app
 COPY requirements.txt .
 COPY output.txt .
 RUN pip install --no-cache-dir -r ./requirements.txt
-RUN chmod 777 ./output.txt
+RUN chmod 777 ./output.txt 
 
 COPY checker.py .
+RUN chmod 777 ./checker.py

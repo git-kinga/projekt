@@ -11,4 +11,5 @@ services:
       - ./Telegraf/output.txt:/app/output.txt
     environment:
       - UNIQUE_TOKEN=YrSHtJjna04JkTkbYb8kkNqGcddOnsED
-    network_mode: host
+
+

@@ -7,6 +7,8 @@ from .forms import LoginForm, RegistrationForm
 from django.http import JsonResponse
 #from .models import URL
 from MonaAppForm.models import MonitorRequest
+from MonaApps.models import Token
+from django.views.decorators.csrf import csrf_exempt
 
 def MonaApps(request):
     return HttpResponse(request,"Hello world!")
@@ -62,6 +64,19 @@ def sign_out(request):
 def dashboard(request):
     return render(request, 'dashboard.html')
 
-def api_config(request):
+def api_config_old(request):
     items = MonitorRequest.objects.all()
     return JsonResponse({ item.id : item.URL for item in items})
+
+@csrf_exempt
+def api_config(request, user):
+    
+    if request.method == 'POST':
+        if request.headers.get('Authorization') == Token.objects.get(user__username=user).token:
+            print("Passed")
+        
+            items = MonitorRequest.objects.all()
+            return JsonResponse({ item.id : item.URL for item in items})
+
+        else: return JsonResponse({'error' : 'Unauthorized'}, status=401)
+    else: return JsonResponse({'error': 'Invalid request method'}, status=405)
