@@ -12,16 +12,21 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9$@86yxm1n7^t7+@h9c@m!5flyr$usk@5z_#vsivs3$*!krvi_'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,6 +46,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'MonaApps.apps.MonaappsConfig',
     'MonaAppForm.apps.MonaappformConfig',
+    "MonaAppsInfluxDB.apps.MonaappsinfluxdbConfig",
 ]
 
 MIDDLEWARE = [
@@ -93,6 +99,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+#Token to authenticate influx retrieve of user's tokens
+INFLUXDB_TOKEN = env('INFLUXDB_TOKEN')
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

@@ -19,8 +19,7 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('MonaApps.urls')),
     path('form/', include('MonaAppForm.urls')),
-    # path('login/', include('MonaApps.urls')),
-    # path('registration/', include('MonaApps.urls')),
     path('admin/', admin.site.urls),
     path('api/config/', include('MonaApps.urls')),
+    path('influx/', include('MonaAppsInfluxDB.urls')),
 ]

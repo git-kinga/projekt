@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Token
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=100,
@@ -49,4 +50,8 @@ class RegistrationForm(UserCreationForm):
         user.password2 = self.cleaned_data['password2']
         if commit:
             user.save()
+            
+            #Create Token object
+            Token.objects.create(user=user)
+        
         return user

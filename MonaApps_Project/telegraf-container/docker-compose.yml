@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  telegaf-python:
+    build:
+      context: ./Telegraf
+      dockerfile: Dockerfile
+    volumes:
+      - ./Telegraf/checker.py:/app/checker.py
+      - ./Telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+      - ./Telegraf/output.txt:/app/output.txt
+    environment:
+      - UNIQUE_TOKEN=YrSHtJjna04JkTkbYb8kkNqGcddOnsED
+    network_mode: host

@@ -7,8 +7,10 @@ class Agent:
         self.config_pull_url = "http://127.0.0.1:8000/api/config"
         # self.agent_id = input("Enter your agent ID: ")
         self.urls = []
+        print('Init')
 
     def get_config(self):
+        print('Get_config')
         response = requests.get(self.config_pull_url)
         print(response.text)
         if response.status_code == 200:
@@ -17,6 +19,14 @@ class Agent:
         else:
             return None
 
+    def save(self, data):
+        line_protocol = '\n'.join([f'site_status,users_tag="tag-to-replace" url="{url}",status="{status}" {time.time_ns()+ind}' 
+                                   for ind, (url, status) in enumerate(data.items())])
+        
+        with open('output.dat', "w") as file:
+            file.write(line_protocol)
+        return True
+        
     def run(self):
         self.urls = self.get_config()
         data={}
@@ -31,6 +41,7 @@ class Agent:
                 response_time = time.time() - start_time
                 if response.status_code == 200:
                     print(f"{url} returned a 200 OK response after {response_time:.2f} seconds")
+                    data[url]=response.status_code
                 else:
                     print(f"{url} returned a {response.status_code} response after {response_time:.2f} seconds")
                     data[url]=response.status_code
@@ -38,6 +49,8 @@ class Agent:
                 print(f"{url} Failed to establish a new connection")
                 data[url]='error'
         json_data=json.dumps(data)
+        if self.save(data):
+            print("Data saved")
         return json_data
 
 def main():
@@ -45,7 +58,6 @@ def main():
     print(agent.urls)
     json_data=agent.run()
     print(json_data)
-    return json_data
 
 if __name__ == "__main__":
     main()
