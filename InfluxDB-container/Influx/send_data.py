@@ -30,12 +30,15 @@ class Sender():
                           for ind, (user, token) in enumerate(data.items())])
     
     def send_tokens(self, line_protocol):
-        print("Trying to send tokens")
-        with InfluxDBClient('http://host.docker.internal:8086/', self.influx_token) as client:
-            with client.write_api() as writer:
-                writer.write(bucket=self.bucket, org='my-org', record=line_protocol)
-                print("DATA_SENT")
-    
+        if line_protocol:
+            print("Trying to send tokens")
+            with InfluxDBClient('http://host.docker.internal:8086/', self.influx_token) as client:
+                with client.write_api() as writer:
+                    writer.write(bucket=self.bucket, org='my-org', record=line_protocol)
+                    print("DATA_SENT")
+
+        else: print("There is no new data to send")
+        
     def get_existing_data(self):
       with InfluxDBClient('http://host.docker.internal:8086/', self.influx_token) as client:
         query_api = client.query_api()

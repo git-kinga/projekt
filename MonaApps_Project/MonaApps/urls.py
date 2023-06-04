@@ -14,4 +14,5 @@ urlpatterns = [
     path('api/config/', views.api_config_old, name='api_config_old'),
     path('api/config/<str:user>', views.api_config, name='api_config'),
     path('api/regenerate/', views.regenerate_token, name='regenerate_token'),
+    path('api/download/', views.download_agent, name='download_agent')
 ]

@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 
 COPY requirements.txt .
-COPY output.txt .
-COPY checker.py .
+
+RUN touch ./output.txt
+RUN chmod 777 ./output.txt
 
 RUN pip install --no-cache-dir -r ./requirements.txt

@@ -2,6 +2,7 @@ import requests
 import time
 import json
 import os
+import sys
 
 class Agent:
     def __init__(self):
@@ -9,57 +10,71 @@ class Agent:
         self.agent_token = os.getenv('UNIQUE_TOKEN')
         self.agent_name = os.getenv('USERNAME')
         self.config_pull_url = f"http://host.docker.internal:8000/api/config/{self.agent_name}"
+        self.message = "Error while collecting data"
 
     def get_config(self):
         try:
             response = requests.post(self.config_pull_url, headers={'Authorization' : self.agent_token})
         except Exception as error:
-            print(error)
-        
+            pass
+
         if response.status_code == 200:
             self.urls=json.loads(response.text)
             return json.loads(response.text)
         else:
             return None
 
+    def format_string(self, string, *args, **kwargs):
+        print(string, type(string))
+        if type(string) == str:
+            print(string.replace(' ', '\\ ').replace(',', '\\,').replace('"', '\\"').replace('=','\\='))
+            return string.replace(' ', '\\ ').replace(',', '\\,').replace('"', '\\"').replace('=','\\=')
+        return string
+        
     def save(self, data):
+        measures = []
         if data:
-            line_protocol = '\n'.join([f'site_status,users_tag="tag-to-replace" url="{url}",status="{status}" {time.time_ns()+ind}' 
-                                    for ind, (url, status) in enumerate(data.items())]) + '\n'
+            for ind, (id, values) in enumerate(data.items()):
+                user, url, status = tuple(map(self.format_string, values))
+
+                measures.append(f'site_status,agent_tok="tag-to-replace",user_name="{user}",url="{url}" status="{status}" {time.time_ns()+ind}')
+
+                print(measures)
+                
+            line_protocol = '\n'.join(measures) + '\n'
             
             with open('/app/output.txt', "w") as file:
-                file.write(line_protocol)
+                try:
+                    file.write(line_protocol)
+                    self.message = "No error"
+                except:
+                    self.message = "Error while saving data to save"
+                    
         
     def run(self):
         self.urls = self.get_config()
         data={}
-        
         if self.urls is None:
-            print("Error: Could not retrieve config")
             return
         
-        for url in self.urls.values():
+        for id, (user, url) in self.urls.items():
+            data[id]=[user, url]
             url = url if url.startswith('http') else 'https://' + url
             try:
                 response = requests.get(url)
-                if response.status_code == 200:
-                    data[url]=response.status_code
-                else:
-                    data[url]=response.status_code
+                status_code = response.status_code
             except:
-                print(f"{url} Failed to establish a new connection")
-                data[url]='error'
-        
-        json_data=json.dumps(data)
+                status_code = 404
+            data[id].append(status_code)
+            
         self.save(data)
-        
-        return json_data
+    
+        return self.message
 
 def main():
     agent = Agent()
-    json_data=agent.run()
-    print(json_data)
+    return agent.run()
+
 
 if __name__ == "__main__":
-    main()
-    
+    sys.exit(main())

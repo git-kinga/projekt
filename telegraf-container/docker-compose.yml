@@ -8,10 +8,9 @@ services:
     volumes:
       - ./Telegraf/checker.py:/app/checker.py
       - ./Telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
-      - ./Telegraf/output.txt:/app/output.txt
     environment:
-      - UNIQUE_TOKEN=YrSHtJjna04JkTkbYb8kkNqGcddOnsED
-      - USERNAME=user01
-      - INFLUX_TOKEN=DKr-tRZM3slF-2JiJP0nEhAwoxbK_464oErFGYXLPLLqHWygZ_HpI_-sFcJCuBteLY5z6hvn0wJgk4xMo1yEbA==
+      - UNIQUE_TOKEN=UyUljOCvVPa1VBu5LbaAVLxy27tN5gz0
+      - USERNAME=|>agent<|
+      - INFLUX_TOKEN=|>token<|
 
 

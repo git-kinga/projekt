@@ -5,12 +5,15 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, RegistrationForm
 from django.http import JsonResponse
-#from .models import URL
 from MonaAppForm.models import MonitorRequest
 from MonaApps.models import Token
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 from datetime import timedelta
+from django.http import FileResponse
+from django.conf import settings
+import os
+import zipfile
 
 def MonaApps(request):
     return HttpResponse(request,"Hello world!")
@@ -75,10 +78,9 @@ def api_config(request, user):
     
     if request.method == 'POST':
         if request.headers.get('Authorization') == Token.objects.get(user__username=user).token:
-            print("Passed")
         
             items = MonitorRequest.objects.all()
-            return JsonResponse({ item.id : item.URL for item in items})
+            return JsonResponse({ item.id : [item.user.username, item.URL] for item in items})
 
         else: return JsonResponse({'error' : 'Unauthorized'}, status=401)
     else: return JsonResponse({'error': 'Invalid request method'}, status=405)
@@ -91,3 +93,51 @@ def regenerate_token(request):
         return HttpResponse('<h1> New Token Generated </h1>')
     else: 
         return HttpResponse('<h1> Please Wait</h1>')
+
+
+#                   NOT COMPLETED                       #
+# @login_required
+# def download_agent(request):
+#     token_object = Token.objects.get(user=request.user)
+#     agent = token_object.user.username
+#     token = token_object.token
+    
+    
+#     # Get the base directory name
+#     base_dir = 'telegraf-container'
+#     directory_path = os.path.join(settings.DOWNLOAD_PATH, base_dir)
+
+#     # Create a temporary zip file to store the zipped directory
+#     temp_zip_path = os.path.join(directory_path, 'temp.zip')
+
+#     # Open the temporary zip file for writing
+#     with zipfile.ZipFile(temp_zip_path, 'w') as zip_write:
+#         # Iterate over all the files in the directory and its subdirectories
+#         for root, _, files in os.walk(directory_path):
+#             for file in files:
+#                 # Get the absolute path of the file
+#                 file_path = os.path.join(root, file)
+
+#                 # Open the file for reading
+#                 with open(file_path, 'r') as f:
+#                     # Read the content of the file
+#                     content = f.read()
+
+#                     # Check if the current file is the desired file to modify
+#                     if file == 'docker-compose.yml':
+#                         # Modify the content by replacing the values
+#                         modified_content = content.replace('|>agent<|', agent).replace('|>token<|', token)
+#                     else:
+#                         # No modification required for other files
+#                         modified_content = content
+
+#                     # Get the relative path of the file within the directory
+#                     relative_path = os.path.relpath(file_path, directory_path)
+
+#                     # Add the modified or original file to the zip with the same relative path
+#                     zip_write.writestr(os.path.join(base_dir, relative_path), modified_content)
+
+#     response = FileResponse(open(temp_zip_path, 'rb'), as_attachment=True, filename='agent-app.zip')
+    
+
+#     return response
