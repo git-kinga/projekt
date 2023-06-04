@@ -1,0 +1,7 @@
+site_status,users_tag="tag-to-replace" url="https://google.com",status="200" 1685804523288721500
+site_status,users_tag="tag-to-replace" url="https://www.google.com/search?q=enumerate+dictionary+items&oq=enumerate+dictionary+items&aqs=chrome..69i57.6460j0j1&sourceid=chrome&ie=UTF-8",status="200" 1685804523288723701
+site_status,users_tag="tag-to-replace" url="https://docs.python.org/3/library/time.html",status="200" 1685804523288725202
+site_status,users_tag="tag-to-replace" url="https://docs.influxdata.com/influxdb/v2.7/query-data/flux/query-fields/",status="200" 1685804523288726203
+site_status,users_tag="tag-to-replace" url="https://sweetcode.io/set-up-telegraf-influxdb-and-grafana-with-docker-compose/",status="200" 1685804523288727204
+site_status,users_tag="tag-to-replace" url="https://instagram.com",status="200" 1685804523288728205
+site_status,users_tag="tag-to-replace" url="https://github.com/influxdata/telegraf/issues/6090",status="200" 1685804523288729106

@@ -9,6 +9,8 @@ from django.http import JsonResponse
 from MonaAppForm.models import MonitorRequest
 from MonaApps.models import Token
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
+from datetime import timedelta
 
 def MonaApps(request):
     return HttpResponse(request,"Hello world!")
@@ -80,3 +82,12 @@ def api_config(request, user):
 
         else: return JsonResponse({'error' : 'Unauthorized'}, status=401)
     else: return JsonResponse({'error': 'Invalid request method'}, status=405)
+    
+@login_required
+def regenerate_token(request):
+    token = Token.objects.get(user=request.user)
+    if token.generate_date <= timezone.now() - timedelta(minutes=5):
+        token.save()
+        return HttpResponse('<h1> New Token Generated </h1>')
+    else: 
+        return HttpResponse('<h1> Please Wait</h1>')

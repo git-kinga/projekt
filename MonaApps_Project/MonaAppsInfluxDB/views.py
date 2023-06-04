@@ -9,6 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def get_tokens(request):
     if request.method == 'POST':
+        print(request.headers.get('Authorization'))
+        print(settings.INFLUXDB_TOKEN)
         if request.headers.get('Authorization') == settings.INFLUXDB_TOKEN:
 
             users = Token.objects.all().values('user__username', 'token')
