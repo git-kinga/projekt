@@ -150,4 +150,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/'
 
-DOWNLOAD_PATH = BASE_DIR = Path(__file__).resolve().parent.parent.parent
+DOWNLOAD_PATH = BASE_DIR = os.path.join(Path(__file__).resolve().parent.parent, 'Download_content')

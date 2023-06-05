@@ -9,9 +9,8 @@ services:
       - ./Telegraf/checker.py:/app/checker.py
       - ./Telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
     environment:
-      - UNIQUE_TOKEN=VdrjAGvNiMIPj7j1OHxl5byUKijZZDtr
-      - USERNAME=user02
+      - UNIQUE_TOKEN=|>token<|
+      - USERNAME=|>agent<|
       - INFLUX_TOKEN=3h7miEqHysoE2W8Gy-MoCGjnDD2r3KWdz1U9w1ffadgLIOaI5WPQwTGD4sGnVSqNN_mp-GPjsC1lAh-UCl9POQ==
-
 
 
