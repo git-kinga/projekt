@@ -11,7 +11,7 @@ services:
     environment:
       - UNIQUE_TOKEN=VdrjAGvNiMIPj7j1OHxl5byUKijZZDtr
       - USERNAME=user02
-      - INFLUX_TOKEN=3h7miEqHysoE2W8Gy-MoCGjnDD2r3KWdz1U9w1ffadgLIOaI5WPQwTGD4sGnVSqNN_mp-GPjsC1lAh-UCl9POQ==
+      - INFLUX_TOKEN=4lC2bBJNFk-9zAA3wMM3hRkRulHBg0WqVlzVUqgjcRpIW4jN35cIhFeDgOHrgrjqTjSXvovqKWxN9JLOEcIRYQ==
 
 
 

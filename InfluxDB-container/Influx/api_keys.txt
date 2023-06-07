@@ -1,2 +1,2 @@
-influx_token: "b9pxY5iHQ_N1xXEKDfuls32e1nRoEEl9wXCe4Hd1S3jAes9sUHLMLBjfFzA1OtNHAlUXI5vTuwBtqy6ncIhUHQ=="
+influx_token: "FQtlZROGpHzuhgxwOjIjQBcqP_Xr0dE6QhJ_ohTYj1GQ2LsHjZFKpUGtZiiLNYgmxbafYYrAZjRFq8DtztHTsw=="
 server_token: "C1HkSXTO8AiWVjD2axX0fTLz29KrbICOEWYtvwUEQw2ejhfZit73igjEz7iwMyhO"

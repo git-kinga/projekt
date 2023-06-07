@@ -26,7 +26,7 @@ class Sender():
     
     def format_dict(self, data: dict) -> str:
         timestamp = time.time_ns()
-        return '\n'.join([f'user_tokens,user="{user}" token="{token}" {timestamp+ind}' 
+        return '\n'.join([f'agent_tokens,agent_name="{user}" agent_tok="{token}" {timestamp+ind}' 
                           for ind, (user, token) in enumerate(data.items())])
     
     def send_tokens(self, line_protocol):
@@ -44,16 +44,17 @@ class Sender():
         query_api = client.query_api()
         query = '''
             from(bucket: "users_tokens")
-                |> range(start: -1d)
-                |> filter(fn: (r) => r._measurement == "user_tokens")
+                |> range(start: 0)
+                |> filter(fn: (r) => r._measurement == "agent_tokens")
                 |> last()
         '''
+        
         tables = query_api.query(org='my-org',query=query)
         existing_data = {}
 
         for table in tables:
             for record in table.records:
-                user = record.values['user'].strip('"')
+                user = record.values['agent_name'].strip('"')
                 token = record.values['_value'].strip('"')
                 if user not in existing_data:
                     existing_data[user] = token
