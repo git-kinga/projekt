@@ -17,10 +17,13 @@ def login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+            remember_me = form.cleaned_data['remember_me']
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 auth_login(request, user)
                 print("### User logged ###")
+                if not remember_me:
+                    request.session.set_expiry(0)
                 return redirect('/dashboard')
             else:
                 error_message = "Invalid username or password."
@@ -60,5 +63,6 @@ def regenerate_token(request):
     else: 
         return HttpResponse('<h1> Please Wait</h1>')
 
+@login_required
 def dashboard(request):
     return render(request, 'dashboard.html')

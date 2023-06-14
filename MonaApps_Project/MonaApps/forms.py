@@ -15,6 +15,9 @@ class LoginForm(forms.Form):
             'placeholder': 'Password'
         }))
 
+    remember_me = forms.BooleanField(required=False)
+
+    
 class RegistrationForm(UserCreationForm):
     username=forms.CharField(max_length=100,
         widget=forms.TextInput(attrs={
