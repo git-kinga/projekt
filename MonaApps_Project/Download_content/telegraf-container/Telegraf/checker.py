@@ -13,6 +13,12 @@ class Agent:
         self.message = "Error while collecting data"
 
     def get_config(self):
+        """Function that connects with api_endpoint to get sites to monitor
+
+        Returns:
+            dictionary: key-value pairs of task id and list of parameters that telegraf need
+        """
+        
         try:
             response = requests.post(self.config_pull_url, headers={'Authorization' : self.agent_token})
         except Exception as error:
@@ -25,6 +31,14 @@ class Agent:
             return None
 
     def format_string(self, string, *args, **kwargs):
+        """function to format sting that line protocol can read
+
+        Args:
+            string (string): string to format
+
+        Returns:
+            string: formatted string
+        """
         print(string, type(string))
         if type(string) == str:
             print(string.replace(' ', '\\ ').replace(',', '\\,').replace('"', '\\"').replace('=','\\='))
@@ -32,6 +46,11 @@ class Agent:
         return string
         
     def save(self, data):
+        """Function that saves data to file, that telegraf read
+
+        Args:
+            data (dictionary): key-value pairs of task and list of parameters and results
+        """
         measures = []
         if data:
             for ind, (id, values) in enumerate(data.items()):

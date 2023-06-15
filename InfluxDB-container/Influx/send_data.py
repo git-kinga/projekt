@@ -15,6 +15,14 @@ class Sender():
         self.bucket = 'users_tokens'
         
     def get_user_tokens(self, token: str):
+        """Function to get all key-value pairs of users and theirs token
+
+        Args:
+            token (str): token to connect to api endpoint  
+
+        Returns:
+            dictionary: key-value pairs of users and tokens
+        """
         try:
             response = requests.post(self.url, headers={'Authorization' : token})
         except Exception as e:
@@ -25,11 +33,24 @@ class Sender():
         return json.loads(response.text)
     
     def format_dict(self, data: dict) -> str:
+        """Creating a line protocol ready to send with information of usernames and theirs tokens
+
+        Args:
+            data (dict): data form function get_user_token
+
+        Returns:
+            str: line protocol ready to send
+        """
         timestamp = time.time_ns()
         return '\n'.join([f'agent_tokens,agent_name="{user}" agent_tok="{token}" {timestamp+ind}' 
                           for ind, (user, token) in enumerate(data.items())])
     
     def send_tokens(self, line_protocol):
+        """Sending data to InfluxDB
+
+        Args:
+            line_protocol (str): line protocol ready to send
+        """
         if line_protocol:
             print("Trying to send tokens")
             with InfluxDBClient('http://host.docker.internal:8086/', self.influx_token) as client:
@@ -40,16 +61,22 @@ class Sender():
         else: print("There is no new data to send")
         
     def get_existing_data(self):
-      with InfluxDBClient('http://host.docker.internal:8086/', self.influx_token) as client:
-        query_api = client.query_api()
-        query = '''
-            from(bucket: "users_tokens")
-                |> range(start: 0)
-                |> filter(fn: (r) => r._measurement == "agent_tokens")
-                |> last()
-        '''
+        """Getting all existing users and theirs tokens
+
+        Returns:
+            dict: key-value pairs of users and their tokens
+        """
+        with InfluxDBClient('http://host.docker.internal:8086/', self.influx_token) as client:
+            query_api = client.query_api()
+            query = '''
+             from(bucket: "users_tokens")
+                 |> range(start: 0)
+                    |> filter(fn: (r) => r._measurement == "agent_tokens")
+                    |> last()
+            '''
         
-        tables = query_api.query(org='my-org',query=query)
+            tables = query_api.query(org='my-org',query=query)
+        
         existing_data = {}
 
         for table in tables:
@@ -62,6 +89,15 @@ class Sender():
         return existing_data
     
     def compare_data(self, existing_data, incoming_data):
+        """Compare existing data with incoming data to send only new or modified users:tokens
+
+        Args:
+            existing_data (dict): data of existing in database pairs user:token
+            incoming_data (dict): data of all pairs user:token from server
+
+        Returns:
+            dict: dictionary of only new or modified pairs user:token
+        """
         updated_users = {}
         
         for user, token in incoming_data.items():
