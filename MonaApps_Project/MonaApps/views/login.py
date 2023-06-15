@@ -11,6 +11,9 @@ from datetime import timedelta
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('/dashboard')
+     
      # Process login form submission
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -35,6 +38,8 @@ def login(request):
 
 
 def registration(request):
+    if request.user.is_authenticated:
+        return redirect('/dashboard')
     if request.method == "GET":
         form = RegistrationForm()
         return render(request, 'registration.html', {'form': form})
