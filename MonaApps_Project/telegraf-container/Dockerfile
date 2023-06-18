@@ -1,15 +1,14 @@
-# Use the official Telegraf base image
 FROM telegraf
 
-# Install Python and any required dependencies
-RUN apt-get update && apt-get install -y python3 python3-pip
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 python3-pip \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install any Python packages required by your script
-# For example, if you need requests module, you can add:
-RUN pip3 install requests
+WORKDIR /app
 
-# Copy the Python script to the container
-COPY checker.py /checker.py
+COPY requirements.txt .
 
-# Set the command to execute the Telegraf process
-CMD ["telegraf", "--config", "/etc/telegraf/telegraf.conf"]
+RUN touch ./output.txt
+RUN chmod 777 ./output.txt
+
+RUN pip install --no-cache-dir -r ./requirements.txt

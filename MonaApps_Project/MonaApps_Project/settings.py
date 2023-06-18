@@ -26,8 +26,9 @@ SECRET_KEY = 'django-insecure-9$@86yxm1n7^t7+@h9c@m!5flyr$usk@5z_#vsivs3$*!krvi_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
+LOGIN_REDIRECT_URL = '/dashboard'
 
 # Application definition
 
@@ -38,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'MonaApps'
 ]
 
 MIDDLEWARE = [
@@ -76,12 +79,12 @@ WSGI_APPLICATION = 'MonaApps_Project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'orcl',
-        'USER': 'oracle',
-        'PASSWORD': 'oracle',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mysql',
+        'USER': 'root',
+        'PASSWORD': 'mysql',
         'HOST': 'localhost',
-        'PORT': '1521',
+        'PORT': '3306',
     }
 }
 
@@ -130,3 +133,5 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_COOKIE_SECURE = False # TURBO WAŻNE, to ustawienie jest tylko na potrzeby przesłania tokena CSRF w fazie developmentu, przy wystawianiu apki do produkcji USUNĄĆ

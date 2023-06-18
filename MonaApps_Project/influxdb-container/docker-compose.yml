@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+  influxdb:
+    restart: always
+    image: influxdb
+    ports:
+      - '8086:8086'
+    volumes:
+      - influxdb-storage:/var/lib/influxdb
+
+    env_file:
+      - .env
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUX_USERNAME}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUX_PASSWORD}
+      - DOCKER_INFLUXDB_INIT_ORG=my-org 
+      - DOCKER_INFLUXDB_INIT_BUCKET=users_tokens
+      - DOCKER_INFLUXDB_HTTP_ENABLED=true
+
+  send_script:
+    build:
+      context: ./Influx
+      dockerfile: Dockerfile
+
+    restart: always
+
+    volumes:
+      - ./Influx/api_keys.txt:/app/api_keys
+
+volumes:
+    influxdb-storage:

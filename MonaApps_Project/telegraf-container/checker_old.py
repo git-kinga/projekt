@@ -4,7 +4,7 @@ import json
 
 class Agent:
     def __init__(self):
-        self.config_pull_url = "http://127.0.0.1:8000/api/config"
+        self.config_pull_url = "http://192.168.56.1:8000/api/config"
         # self.agent_id = input("Enter your agent ID: ")
         self.urls = []
 
@@ -19,6 +19,7 @@ class Agent:
 
     def run(self):
         self.urls = self.get_config()
+        data={}
         if self.urls is None:
             print("Error: Could not retrieve config")
             return
@@ -30,11 +31,16 @@ class Agent:
                 print(f"{url} returned a 200 OK response after {response_time:.2f} seconds")
             else:
                 print(f"{url} returned a {response.status_code} response after {response_time:.2f} seconds")
+            data[url]=response.status_code
+        json_data=json.dumps(data)
+        return json_data
 
 def main():
     agent = Agent()
     print(agent.urls)
-    agent.run()
+    json_data=agent.run()
+    print(json_data)
+    return json_data
 
 if __name__ == "__main__":
     main()

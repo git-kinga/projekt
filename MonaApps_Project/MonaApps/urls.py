@@ -3,8 +3,7 @@ from . import views
 from .views import api_config
 
 urlpatterns = [
-    path('MonaApps/', views.MonaApps, name='MonaApps'),
-    path('', views.index, name='index'),
+    path('', views.MonaApps, name='MonaApps'),
     path('form/', views.form, name='form'),
     path('login/', views.login, name='login'),
     path('registration/', views.registration, name='registration'),
