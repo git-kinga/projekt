@@ -7,6 +7,7 @@ from ..forms import LoginForm, RegistrationForm
 from MonaApps.models import Token
 from django.utils import timezone
 from datetime import timedelta
+from django.contrib import messages
 
 
 
@@ -40,19 +41,24 @@ def login(request):
 def registration(request):
     if request.user.is_authenticated:
         return redirect('/dashboard')
-    if request.method == "GET":
-        form = RegistrationForm()
-        return render(request, 'registration.html', {'form': form})
     if request.method == "POST":
         form = RegistrationForm(request.POST)
-        if not form.is_valid():
-            print(form.errors)
-        if form.is_valid() and request.POST['agree'] == 'on':
+        if form.is_valid():
             user = form.save()
             print("### User created ###")
             auth_login(request, user)
             return redirect('/')
-        return render(request, 'registration.html', {'form': form})
+        else: 
+            print("error views")
+            for field in form.errors:
+                print('errorField')
+                for error in form.errors[field]:
+                    messages.error(request, f'{error}', extra_tags='alert alert-danger')
+                    print("Error css")
+            return redirect(request.path)
+    else:
+        form = RegistrationForm()
+    return render(request, 'registration.html', {'form': form})
 
 @login_required
 def sign_out(request):

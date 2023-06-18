@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>Monitoring web-app</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <script src="{% static 'js/bootstrap.js' %}"></script> 
   </head>
   <body>
         <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -25,7 +27,7 @@
               <div class="position-sticky pt-3 sidebar-sticky">
                 <ul class="nav flex-column">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#" onclick="showDashboard()">
+                    <a class="nav-link active" aria-current="page" href="../dashboard" onclick="showDashboard()">
                       <span data-feather="home" class="align-text-bottom"></span>
                       Main dashboard
                     </a>
@@ -37,21 +39,13 @@
                     </a>
                   </h6>
                   <li class="nav-item">
-<<<<<<< HEAD
                     <a class="nav-link" aria-current="page" href="#" onclick="showMonitoring()">
-=======
-                    <a class="nav-link" href="Monitoring_form.html">
->>>>>>> MonitoringForm
                       <span data-feather="file" class="align-text-bottom"></span>
                       Your monitoring
                     </a>
                   </li>
                   <li class="nav-item">
-<<<<<<< HEAD
-                    <a class="nav-link" href="#" onclick="showMonitoringForm()">
-=======
-                    <a class="nav-link" href="../form">
->>>>>>> MonitoringForm
+                    <a class="nav-link" href="../form" onclick="showMonitoringForm()">
                       <span data-feather="shopping-cart" class="align-text-bottom"></span>
                       Add a new monitoring service
                     </a>
@@ -65,11 +59,7 @@
                   </h6>
                 <ul class="nav flex-column mb-2">
                   <li class="nav-item">
-<<<<<<< HEAD
                     <a class="nav-link" href="#" onclick="showTelegraf()">
-=======
-                    <a class="nav-link" href="plugin/">
->>>>>>> MonitoringForm
                       <span data-feather="file-text" class="align-text-bottom"></span>
                       Download a monitoring agent
                     </a>
@@ -87,7 +77,6 @@
             {% block content %}
             {% endblock %}
             </main>
-        </div> 
-    <script src="../static/js/bootstrap.js"></script>     
+        </div>     
   </body>
 </html>

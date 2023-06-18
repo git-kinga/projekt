@@ -4,20 +4,20 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">Add a new monitoring service</h1>
     </div>     
-    <form>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Service to monitor</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Monitoring interval</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-      </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Get an email notification if the service is not available</label>
-      </div>
+    {% load django_bootstrap5 %}
+    {% if messages %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <form method="post" class="form">
+      {% csrf_token %}
+      {% bootstrap_form form %}
       <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </form> 
   </section> 
 {% endblock %}

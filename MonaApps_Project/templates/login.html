@@ -1,86 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  {% load static %}
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login to the monitoring web-app</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-
-<body>
-  <div class="background"></div>
-  <div class="container">
-    <div class="content">
-      <h2 class="logo"><i><i class='bx bx-desktop'></i></i></i> Samsung</h2>
-    </div>
-
-    <div class="logreg-box">
-      <div class="form-box login">
-        {% if error_message %}
-        <div class="alert alert-danger">
-          {{ error_message }}
-        </div>
-        {% endif %}
-        {% block content %}
-        <form action="/" method="post">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login to the monitoring web-app</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/bootstrap.css' %}"
+    />
+  </head>
+  <body>
+    <div class="background"></div>
+    <div class="wrapper">
+      {% if error_message %}
+      <div class="alert alert-danger">{{ error_message }}</div>
+      {% endif %}
+      <div class="form-box">
+        <form class="form" method="post" action="/">
           {% csrf_token %}
-          <h2>Sign In</h2>
-
-          <div class="input-box">
-            <span class="icon"><i class='bx bxs-envelope'></i></span>
-            {{ form.username }}
-            <label>Username</label>
+          <div class="headline">
+            <h1>Welcome</h1>
           </div>
-
-          <div class="input-box">
-            <span class="icon"><i class='bx bxs-lock'></i></span>
-            {{ form.password }}
-            <label>Password</label>
-          </div>
-
-          <div class="remember-forgot">
-            
-            <label>{{ form.remember_me}}Remember me</label>
-            <a href="reset_password/" class="forgot-link">Forgot password?</a>
-          </div>
-
-          <button type="submit" class="btn">Sign In</button>
-          {% endblock %}
-          <!-- <script src="../static/js/script.js"></script> -->
-          <div class="login-register">
-            <p>Don't have an account?
-              <a href="/registration" class="register-link">Sign up</a>
-            </p>
+          <div class="signin" id="login">
+            <div class="form-group">{{ form.username }}</div>
+            <div class="input-box">
+              {{ form.password }}
+              <img src="{% static 'images/eye-close.png' %}" id="sineyeicon" />
+            </div>
+            <div class="forget-password">
+              <div class="check-box">
+                <label>{{ form.remember_me }}Remember me</label>
+              </div>
+              <a href="#" id="forgot">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn">LOGIN</button>
+            <div class="account-exist">
+              Create New a account?
+              <a href="registration" id="signup">Sign up</a>
+            </div>
           </div>
         </form>
       </div>
-
-      <div class="form-box forgot">
-        <form action="#" method="post">
-          {% csrf_token %}
-          <h2>Forgot password</h2>
-          <p>Enter your email to reset your password</p>
-
-          <div class="input-box">
-            <input type="email" id="floatingInput" class="passInput" required>
-            <span class="icon"><i class='bx bxs-envelope'></i></span>
-            <label>Email</label>
-          </div>
-          <button type="submit" id="floatingPassword" class="btn">Send my password</button>
-          <!-- <script src="../static/js/script.js"></script> -->
-          <div class="login-register">
-            <p>Already have an account?
-              <a href="#" class="login-link">Sign in</a>
-            </p>
-          </div>
-        </form>
-      </div>
-
     </div>
-  </div>
-  <!-- <script src="../static/js/script.js"></script> -->
-</body>
-
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+  </body>
 </html>
