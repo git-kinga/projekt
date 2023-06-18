@@ -14,8 +14,9 @@ urlpatterns = [
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     
     path('dashboard/', dashboard.dashboard, name='dashboard'),
-    path('dashboard/monitoring/', dashboard.monitoring, name='monitoring'),
+    path('dashboard/monitoring/', dashboard.your_monitoring, name='your_monitoring'),
     path('dashboard/plugin/', dashboard.download_plugin, name='plugin'),
+    path('dashboard/renew/', dashboard.renew_token, name='renew_token'),
 
     path('api/config/<str:user>', api.api_config, name='api_config'),
     path('api/regenerate/', login.regenerate_token, name='regenerate_token'),
