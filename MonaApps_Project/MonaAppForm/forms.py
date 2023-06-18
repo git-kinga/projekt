@@ -6,7 +6,7 @@ from .models import MonitorRequest
 class MonitorForm(forms.ModelForm):    
     class Meta:
         model = MonitorRequest
-        fields = ['URL', 'notification',]
+        fields = ['URL']
         widgets = {'interval':forms.Select(choices=((1, 1), (2, 2), (3, 3)))}
         labels = {
             'URL':'Monitor to service',

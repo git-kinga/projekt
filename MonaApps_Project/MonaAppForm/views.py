@@ -24,4 +24,4 @@ def form(request):
             return redirect(request.path)
     else:
         form =MonitorForm()
-    return render(request, 'Monitoring_form.html', {'form':form})
+    return render(request, 'New_monitoring_service.html', {'form':form})

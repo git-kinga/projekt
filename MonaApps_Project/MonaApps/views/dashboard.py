@@ -3,11 +3,11 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    return render(request, 'Dashboard.html')
 
 @login_required
 def download_plugin (request):
-    return render(request, 'Telegraf_plugin.html')
+    return render(request, 'Monitoring_agent.html')
 
 @login_required
 def monitoring (request):

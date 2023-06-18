@@ -74,6 +74,3 @@ def regenerate_token(request):
     else: 
         return HttpResponse('<h1> Please Wait</h1>')
 
-@login_required
-def dashboard(request):
-    return render(request, 'dashboard.html')
