@@ -150,7 +150,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/'
 
-DOWNLOAD_PATH = BASE_DIR = os.path.join(Path(__file__).resolve().parent.parent, 'Download_content')
+DOWNLOAD_PATH = os.path.join(BASE_DIR, 'Download_content')
 
 
 #SMTP CONFIG
