@@ -44,8 +44,9 @@ class MonitorForm(forms.ModelForm):
         return expire_date
             
     
-    def save(self, user, expire_date):
+    def save(self, user):
         url = self.cleaned_data['URL']
+        expire_date = self.cleaned_data['expire_date']
         current_time = timezone.now()
         instance = MonitorRequest(user=user, URL=url, expire_date=expire_date, date=current_time)
         instance.save()
