@@ -1,44 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login test page</title>
+  <title>Login to the monitoring web-app</title>
   <link rel="stylesheet" href="../static/css/style.css">
   </head>
   <body> 
-  <div class="background"></div>
-  <div class="wrapper">
+    <div class="background"></div>
+    <div class="wrapper">
     <div class="form-box">
       <form class="form" method="post" action="#">
         <div class="headline">
             <h1>Welcome</h1>
         </div>
-         <div class="signup">
-             <div class="form-group">
-                 <input type="text" placeholder="Full name" required="">
-             </div>
-             <div class="form-group">
-                 <input type="email" name="signup-email" placeholder="Email" required="">
-             </div>
-             <div class="input-box">
-                 <input type="password" name="signup-password" placeholder="Password" id="password" required="">
-                 <span class="password-strength"></span>
-                 <img src="../static/images/eye-close.png" id="eyeicon">
-                 
-             </div>
-             <div class="input-box">
-                <input type="password" placeholder="Confirm Password" id="conpassword" required="">
-                <img src="../static/images/eye-close.png" id="coneyeicon">
-             </div>
-             <button type="submit" class="btn">SIGN UP</button>
-             <div class="account-exist">
-                 Already have an account? <a href="#" id="login">Login</a>
-             </div>
-         </div>
-         <div class="signin"> 
+         <div class="signin" id="login"> 
              <div class="form-group">
                  <input type="email" name="signin-email" placeholder="Email" required="">
              </div>
@@ -55,10 +31,10 @@
              </div>
              <button type="submit" class="btn">LOGIN</button>
              <div class="account-exist">
-                 Create New a account? <a href="#" id="signup">Signup</a>
+                 Create New a account? <a href="registration.html" id="signup">Sign up</a>
              </div>
          </div>
-         <div class="forget">
+         <div class="forget" id="forget">
             <div class="form-group">
               <input type="email" name="forget-email" placeholder="Email" required="">
             </div>
@@ -66,12 +42,10 @@
             <div class="account-exist">
               <a href="#" id="back">Back</a>
             </div>
-          </div>
-      
+          </div>    
       </form>
-  </div>
-  <script src="../static/js/script.js"></script>
-</div>
-</body>
-
+    </div>
+    <script src="../static/js/script.js"></script>
+    </div>
+  </body>
 </html>

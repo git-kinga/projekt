@@ -1,0 +1,129 @@
+'''
+from(bucket: "users_tokens")
+  |> range(start: -1d)
+  |> filter(fn: (r) => r._measurement == "agent_tokens")
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> keep(columns: ["agent_name", "agent_tok"])
+  |> last(column: "agent_tok")
+  
+  
+  '''
+  
+  
+'''
+
+from(bucket: "MonaInflux")
+  |> range(start: -1d)
+  |> filter(fn: (r) => r._measurement == "site_status")
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> keep(columns: ["url", "status", "users_tag"])'''
+  
+  
+'''  validTokens = from(bucket: "users_tokens")
+  |> range(start: -1d)
+  |> filter(fn: (r) => r._measurement == "user_tokens")
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> keep(columns: ["token", "user"])
+
+
+
+
+    validTokens = from(bucket: "users_tokens")
+    |> range(start: -10d)
+    |> filter(fn: (r) => r._measurement == "user_tokens")
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> keep(columns: ["token", "user"])
+
+
+siteStatus = from(bucket: "MonaInflux")
+  |> range(start: -10d)
+  |> filter(fn: (r) => r._measurement == "site_status")
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> keep(columns: ["url", "status", "users_tag"])
+
+join(
+  tables: {validTokens : validTokens, siteStatus : siteStatus},
+  on: ["users_tag" , "token"]
+  )
+
+
+
+
+join.inner(
+  left: left,
+  right: right,
+  on: (l, r) =>  l.user_tag == r.token,
+  as: (l, r) => ({l with user: r.user}),
+  )
+'''
+
+
+'''
+latestTokens = from(bucket: "users_tokens")
+  |> range(start: 0)
+  |> filter(fn: (r) => r._measurement == "agent_tokens")
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> keep(columns: ["agent_name", "agent_tok"])
+  |> last(column: "agent_tok")
+
+metricsData = from(bucket: "telegraf_agent_data")
+  |> range(start: 0)
+  |> filter(fn: (r) => r._measurement == "site_status" and exists(r.agent_tok))
+  |> keep(columns: ["_time", "agent_tok", "host", "url", "user_name"])
+
+
+validMetrics=join(
+  tables: {latestTokens: latestTokens, metricsData: metricsData},
+  on: ["agent_tok"],
+  )
+  |> map(fn: (r) => ({
+    r with
+    _measurement: "valid_metrics",
+    _field: r.metricsData.status,
+    agent_username: r.latestTokens.user,
+    url: r.metricsData.url
+  }))
+  |> to(bucket: "valid_metrics")
+
+'''
+
+
+'''option t = {
+  name: "validate_tokens",
+  every: 30s,
+}
+
+
+latestTokens = from(bucket: "users_tokens")
+  |> range(start: -t.every)
+  |> filter(fn: (r) => r._measurement == "agent_tokens")
+  |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> keep(columns: ["agent_name", "agent_tok"])
+  |> last(column: "agent_tok")
+
+// yield(tables: latestTokens)
+
+metricsData = from(bucket: "telegraf_agent_data")
+  |> range(start: -t.every)
+  |> filter(fn: (r) => r._measurement == "site_status" and exists(r.agent_tok))
+  |> keep(columns: ["_time", "_measurement", "agent_tok", "host", "url", "_value", "user_name"])
+  |> rename(columns: {_value: "status_code"})
+
+// yield(tables: metricsData)
+
+validMetrics = join(
+  tables: {latestTokens: latestTokens, metricsData: metricsData},
+  on: ["agent_tok"],
+)
+  |> map(fn: (r) => ({
+    _measurement: r._measurement,
+    agent_name: r.agent_name,
+    host: r.host,
+    user_name: r.user_name,
+    url: r.url,
+    _field: "status",
+    _value: r.status_code,
+    _time: r._time
+  }))
+  |> to(bucket: "valid_metrics")
+'''
