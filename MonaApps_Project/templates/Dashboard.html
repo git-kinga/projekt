@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>Monitoring web-app</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
     <script src="../static/js/bootstrap.js"></script>
-    </head>
-    <body>
-    
+  </head>
+  <body>
         <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
           <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">SAMSUNG</a>
           <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,10 +18,8 @@
             <div class="nav-item text-nowrap">
               <a class="nav-link px-3" href="login.html">Sign out</a>
             </div>
-          </div>
-          
-        </header>
-        
+          </div>         
+        </header>        
         <div class="container-fluid">
           <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
@@ -74,13 +71,11 @@
                   </li>
                 </ul>
               </div>
-            </nav>
-                 
+            </nav>                
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             {% block content %}
             {% endblock %}
             </main>
-          </div>
-        
-</body>
+        </div>      
+  </body>
 </html>
