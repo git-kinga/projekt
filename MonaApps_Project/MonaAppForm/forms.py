@@ -6,12 +6,16 @@ from .models import MonitorRequest
 class MonitorForm(forms.ModelForm):    
     class Meta:
         model = MonitorRequest
-        fields = ['URL']
-        widgets = {'interval':forms.Select(choices=((1, 1), (2, 2), (3, 3)))}
+        fields = ['URL', 'expire_date']
+        widgets = {
+            'interval':forms.Select(choices=((1, 1), (2, 2), (3, 3))),
+            'expire_date':forms.DateTimeInput(attrs={'type': 'datetime-local'})
+                   }
         labels = {
             'URL':'Monitor to service',
             'interval':'Interval',
-            'notification':'Get an email notification if the service is not available'
+            'notification':'Get an email notification if the service is not available',
+            'expire_date': 'Monitoring due date'
         }
         
     
@@ -33,9 +37,16 @@ class MonitorForm(forms.ModelForm):
             raise forms.ValidationError('Invalid URL')
         return url
     
-    def save(self, user):
+    def clean_expire_date(self):
+        expire_date = self.cleaned_data['expire_date']
+        if expire_date <= timezone.now() + timezone.timedelta(days=1):
+            raise forms.ValidationError('The date must be min 1 day future')
+        return expire_date
+            
+    
+    def save(self, user, expire_date):
         url = self.cleaned_data['URL']
         current_time = timezone.now()
-        url_obj = MonitorRequest(user=user, URL=url, date=current_time)
-        url_obj.save()
-        return url_obj
+        instance = MonitorRequest(user=user, URL=url, expire_date=expire_date, date=current_time)
+        instance.save()
+        return instance
