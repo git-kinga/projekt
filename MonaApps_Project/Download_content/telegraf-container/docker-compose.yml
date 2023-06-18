@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  telegaf-python:
+    build:
+      context: ./Telegraf
+      dockerfile: Dockerfile
+    volumes:
+      - ./Telegraf/checker.py:/app/checker.py
+      - ./Telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+    environment:
+      - UNIQUE_TOKEN=|>token<|
+      - USERNAME=|>agent<|
+      - INFLUX_TOKEN=4lC2bBJNFk-9zAA3wMM3hRkRulHBg0WqVlzVUqgjcRpIW4jN35cIhFeDgOHrgrjqTjSXvovqKWxN9JLOEcIRYQ==
+
+
