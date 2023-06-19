@@ -14,7 +14,7 @@ class LoginForm(forms.Form):
             'type': 'password',
             'placeholder': 'Password'
         }))
-    remember_me = forms.BooleanField(required=False)
+    remember_me = forms.BooleanField(required=False, initial=False)
 
 class RegistrationForm(UserCreationForm):
     full_name = forms.CharField(max_length=100,
