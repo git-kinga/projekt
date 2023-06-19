@@ -30,8 +30,13 @@ def login(request):
                     request.session.set_expiry(0)
                 return redirect('/dashboard')
             else:
-                error_message = "Invalid username or password."
-                return redirect('/',{'error_message': error_message})
+                # print("UserNone")
+                for field in form.errors:
+                    print("UserNone")
+                    for error in form.errors[field]:
+                        messages.error(request, f'{error}', extra_tags='alert alert-danger')
+                        print("Error css")
+                return redirect(request.path)
     else:
         print("### User not logged ###")
         form = LoginForm()

@@ -15,9 +15,16 @@
   <body>
     <div class="background"></div>
     <div class="wrapper">
-      {% if error_message %}
-      <div class="alert alert-danger">{{ error_message }}</div>
-      {% endif %}
+      {% load django_bootstrap5 %}
+        {% if messages %}
+        <div class="alert alert-danger">
+          <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
       <div class="form-box">
         <form class="form" method="post" action="/">
           {% csrf_token %}
