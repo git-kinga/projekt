@@ -1,5 +1,5 @@
 # projekt
-## Rozproszony system monitoringu usług sieciowych w wspołpracy z Samsung
+## Rozproszony system monitoringu usług sieciowych w współpracy z firmą Samsung
 
 Autorzy:
 Kinga Górska,
