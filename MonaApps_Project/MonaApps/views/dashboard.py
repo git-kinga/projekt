@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from MonaAppForm.models import MonitorRequest
 from django.utils import timezone
 from django.db.models import Q
+from django.conf import settings
 
 percent_encode = {
     # ':' :'%3A',
@@ -57,4 +58,4 @@ def your_monitoring (request):
     active_urls_pair = [(x, format_url(x.URL)) for x in active_urls]  
     finished_urls_pair = [(x, format_url(x.URL)) for x in finished_urls]
     
-    return render(request, 'Your_monitoring.html', {'user': request.user.get_username(), 'active_urls_pair':active_urls_pair, 'finished_urls_pair':finished_urls_pair})
+    return render(request, 'Your_monitoring.html', {'user': request.user.get_username(), 'iframe_url': settings.GRAFANA_IFRAME_LINK,'active_urls_pair':active_urls_pair, 'finished_urls_pair':finished_urls_pair})

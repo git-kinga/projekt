@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 
 .vscode
+InfluxDB-container/.env
+MonaApps_Project/MonaApps_Project/.env

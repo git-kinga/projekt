@@ -1,10 +1,10 @@
 {% extends "Dashboard.html" %}
 {% comment %} /*!
- * Bootstrap  v5.2.3 (https://getbootstrap.com/)
- * Copyright 2011-2022 The Bootstrap Authors
- * Copyright 2011-2022 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */ {% endcomment %}
+* Bootstrap v5.2.3 (https://getbootstrap.com/)
+* Copyright 2011-2022 The Bootstrap Authors
+* Copyright 2011-2022 Twitter, Inc.
+* Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+*/ {% endcomment %}
 {% block content %}
 <nav aria-label="...">
   <ul class="pagination pagination-lg">
@@ -24,7 +24,7 @@
     <div class="accordion" id="SummaryAccordion">
       {% if active_urls_pair %}
       <h2></h2>
-    
+
       <div class="accordion-item">
         <h2 class="accordion-header">
           <button class="accordion-button" type="button"
@@ -40,14 +40,14 @@
           <div class="accordion-body">
             {% for url_obj, url_str in active_urls_pair %}
             <iframe
-              src="http://localhost:3000/d-solo/dc50118d-16cf-4d6b-8929-82fabd914b32/monitoring-site-dashboard?orgId=1&theme=light&panelId=1&var-user={{user}}&var-url={{ url_str }}"
+              src="{{ iframe_url }}&var-user={{user}}&var-url={{ url_str }}"
               width="40%" height="200" frameborder="0"></iframe>
             {% endfor %}
           </div>
         </div>
       </div>
       {% endif %}
-    
+
       {% if finished_urls_pair %}
       <hr>
       <div class="accordion-item">
@@ -65,7 +65,7 @@
           <div class="accordion-body">
             {% for url_obj, url_str in finished_urls_pair %}
             <iframe
-              src="http://localhost:3000/d-solo/dc50118d-16cf-4d6b-8929-82fabd914b32/monitoring-site-dashboard?orgId=1&theme=light&panelId=1&var-user={{user}}&var-url={{ url_str }}"
+              src="{{ iframe_url }}&from={{ url_obj.date|date:'U' }}000&to={{ url_obj.expire_date|date:'U' }}000&var-user={{user}}&var-url={{ url_str }}"
               width="40%" height="200" frameborder="0"></iframe>
             {% endfor %}
           </div>
@@ -104,7 +104,7 @@
               <button type="submit" class="btn btn-danger">Finish request early</button>
             </form>
             <iframe
-              src="http://localhost:3000/d-solo/dc50118d-16cf-4d6b-8929-82fabd914b32/monitoring-site-dashboard?orgId=1&theme=light&panelId=1&var-user={{user}}&var-url={{ url_str }}"
+              src="{{ iframe_url }}&var-user={{user}}&var-url={{ url_str }}"
               width="100%" height="300" frameborder="0" loading="lazy"></iframe>
           </div>
         </div>
@@ -130,7 +130,7 @@
           class="accordion-collapse collapse collapse">
           <div class="accordion-body">
             <iframe
-              src="http://localhost:3000/d-solo/dc50118d-16cf-4d6b-8929-82fabd914b32/monitoring-site-dashboard?orgId=1&theme=light&panelId=1&var-user={{user}}&var-url={{ url_str }}"
+            src="{{ iframe_url }}&from={{ url_obj.date|date:'U' }}000&to={{ url_obj.expire_date|date:'U' }}000&var-user={{user}}&var-url={{ url_str }}"
               width="100%" height="300" frameborder="0" loading="lazy"></iframe>
           </div>
         </div>

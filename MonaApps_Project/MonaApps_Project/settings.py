@@ -80,19 +80,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'MonaApps_Project.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.oracle',
-#         'NAME': 'orcl',
-#         'USER': 'oracle',
-#         'PASSWORD': 'oracle',
-#         'HOST': 'localhost',
-#         'PORT': '1521',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -102,6 +89,8 @@ DATABASES = {
 
 #Token to authenticate influx retrieve of user's tokens
 INFLUXDB_AUTH_TOKEN = env('INFLUXDB_AUTH_TOKEN')
+
+GRAFANA_IFRAME_LINK = r'http://localhost:3000/d-solo/dc50118d-16cf-4d6b-8929-82fabd914b32/monitoring-site-dashboard?orgId=1&theme=light&panelId=1'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

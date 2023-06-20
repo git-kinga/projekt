@@ -101,14 +101,15 @@ class Sender():
         """
         updated_users = {}
         
-        for user, token in incoming_data.items():
-            if user in tuple(existing_data.keys()):
-                if token != existing_data[user]:
-                    print("NEW TOKEN")
+        if incoming_data:
+            for user, token in incoming_data.items():
+                if user in tuple(existing_data.keys()):
+                    if token != existing_data[user]:
+                        print("NEW TOKEN")
+                        updated_users[user] = token
+                else: 
+                    print("NEW USER")
                     updated_users[user] = token
-            else: 
-                print("NEW USER")
-                updated_users[user] = token
                 
         return updated_users
     
