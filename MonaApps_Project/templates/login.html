@@ -1,3 +1,9 @@
+<!-- /*!
+ * Bootstrap  v5.2.3 (https://getbootstrap.com/)
+ * Copyright 2011-2022 The Bootstrap Authors
+ * Copyright 2011-2022 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */ -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,22 +15,21 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{% static 'css/bootstrap.css' %}"
-    />
+      href="{% static 'css/bootstrap.css' %}" />
   </head>
   <body>
     <div class="background"></div>
     <div class="wrapper">
       {% load django_bootstrap5 %}
-        {% if messages %}
-        <div class="alert alert-danger">
-          <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        {% endif %}
+      {% if messages %}
+      <div class="alert alert-danger">
+        <ul>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
       <div class="form-box">
         <form class="form" method="post" action="/">
           {% csrf_token %}
@@ -35,7 +40,6 @@
             <div class="form-group">{{ form.username }}</div>
             <div class="input-box">
               {{ form.password }}
-              <img src="{% static 'images/eye-close.png' %}" id="sineyeicon" />
             </div>
             <div class="forget-password">
               <div class="check-box">

@@ -10,7 +10,7 @@ class MonitorRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='urls')
     expire_date = models.DateTimeField()
     date = models.DateTimeField()
-    active = models.BooleanField(default=True)
+    terminated = models.BooleanField(default=False)
 
     def __str__(self):
         return f'URL: {self.URL} User: {self.user}'

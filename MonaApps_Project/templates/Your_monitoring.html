@@ -1,12 +1,172 @@
 {% extends "Dashboard.html" %}
+{% comment %} /*!
+ * Bootstrap  v5.2.3 (https://getbootstrap.com/)
+ * Copyright 2011-2022 The Bootstrap Authors
+ * Copyright 2011-2022 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */ {% endcomment %}
 {% block content %}
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Your monitoring</h1>
-  </div>
-  {% if urls%}
-  {% for url in urls %} 
-  <iframe src="http://localhost:3000/d-solo/dc50118d-16cf-4d6b-8929-82fabd914b32/monitoring-site-dashboard?orgId=1&theme=light&panelId=1&var-user={{user}}&var-url={{ url }}" width="40%" height="200" frameborder="0"></iframe>
-  {% endfor %}
-  {% endif %}
-{% endblock %}
+<nav aria-label="...">
+  <ul class="pagination pagination-lg">
+    <li id="page-1" class="page-item active" aria-current="page">
+      <a class="page-link">Monitoring Summary</a>
+    </li>
+    <li id="page-2" class="page-item">
+      <a class="page-link">Details and manage</a>
+    </li>
+  </ul>
+</nav>
 
+<div id="page-1-content" class="page-content active">
+  <h1>Monitoring Summary</h1>
+  <hr>
+  <p>
+    <div class="accordion" id="SummaryAccordion">
+      {% if active_urls_pair %}
+      <h2></h2>
+    
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#summaryAcc-active"
+            aria-expanded="true"
+            aria-controls="summaryAcc-active">
+            Active monitoring requests
+          </button>
+        </h2>
+        <div id="summaryAcc-active"
+          class="accordion-collapse collapse colapse">
+          <div class="accordion-body">
+            {% for url_obj, url_str in active_urls_pair %}
+            <iframe
+              src="http://localhost:3000/d-solo/dc50118d-16cf-4d6b-8929-82fabd914b32/monitoring-site-dashboard?orgId=1&theme=light&panelId=1&var-user={{user}}&var-url={{ url_str }}"
+              width="40%" height="200" frameborder="0"></iframe>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    
+      {% if finished_urls_pair %}
+      <hr>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#summaryAcc-finished"
+            aria-expanded="true"
+            aria-controls="summaryAcc-finished">
+            finished monitoring requests
+          </button>
+        </h2>
+        <div id="summaryAcc-finished"
+          class="accordion-collapse collapse collapse">
+          <div class="accordion-body">
+            {% for url_obj, url_str in finished_urls_pair %}
+            <iframe
+              src="http://localhost:3000/d-solo/dc50118d-16cf-4d6b-8929-82fabd914b32/monitoring-site-dashboard?orgId=1&theme=light&panelId=1&var-user={{user}}&var-url={{ url_str }}"
+              width="40%" height="200" frameborder="0"></iframe>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </p>
+</div>
+
+<div id="page-2-content" class="page-content">
+  <h1>Details and manage</h1>
+  <p>
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+      {% if active_urls_pair %}
+      <h2>Active monitoring requests</h2>
+      {% for url_obj, url_str in active_urls_pair %}
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-active{{forloop.counter}}"
+            aria-expanded="true"
+            aria-controls="panelsStayOpen-active{{forloop.counter}}">
+            {{url_obj.URL}}
+          </button>
+        </h2>
+        <div id="panelsStayOpen-active{{forloop.counter}}"
+          class="accordion-collapse collapse collapse">
+          <div class="accordion-body">
+            <h2>Finish date: {{url_obj.expire_date}}</h2>
+
+            <form method="post" action="{% url 'terminate_url'%}">
+              {% csrf_token %}
+              <input type="hidden" name="url_id" value="{{ url_obj.id }}">
+              <button type="submit" class="btn btn-danger">Finish request early</button>
+            </form>
+            <iframe
+              src="http://localhost:3000/d-solo/dc50118d-16cf-4d6b-8929-82fabd914b32/monitoring-site-dashboard?orgId=1&theme=light&panelId=1&var-user={{user}}&var-url={{ url_str }}"
+              width="100%" height="300" frameborder="0" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      <hr>
+      {% if finished_urls_pair %}
+      <h2>Finished monitoring requests</h2>
+      {% for url_obj, url_str in finished_urls_pair %}
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-finished{{forloop.counter}}"
+            aria-expanded="true"
+            aria-controls="panelsStayOpen-finished{{forloop.counter}}">
+            {{url_obj.URL}}
+          </button>
+        </h2>
+        <div id="panelsStayOpen-finished{{forloop.counter}}"
+          class="accordion-collapse collapse collapse">
+          <div class="accordion-body">
+            <iframe
+              src="http://localhost:3000/d-solo/dc50118d-16cf-4d6b-8929-82fabd914b32/monitoring-site-dashboard?orgId=1&theme=light&panelId=1&var-user={{user}}&var-url={{ url_str }}"
+              width="100%" height="300" frameborder="0" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </p>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Custom JavaScript -->
+<script>
+$(document).ready(function() {
+// Set initial active button
+var activeButton = $('#page-1');
+
+// Handle button click events
+$('.page-link').click(function(e) {
+e.preventDefault();
+
+// Remove active class from the previous active button
+activeButton.removeClass('active');
+
+// Add active class to the clicked button
+$(this).parent().addClass('active');
+
+// Update the active button
+activeButton = $(this).parent();
+
+// Show/hide the corresponding content
+var targetId = $(this).parent().attr('id');
+$('.page-content').removeClass('active');
+$('#' + targetId + '-content').addClass('active');
+});
+});
+</script>
+{% endblock %}

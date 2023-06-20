@@ -6,6 +6,7 @@ from MonaApps.models import Token
 from django.views.decorators.csrf import csrf_exempt
 from django.http import FileResponse
 from django.conf import settings
+from django.utils import timezone
 import os
 import zipfile
 from io import BytesIO
@@ -20,10 +21,16 @@ def api_config(request, user):
         print(Token.objects.get(user__username=user).token)
         if request.headers.get('Authorization') == Token.objects.get(user__username=user).token:
         
-            items = MonitorRequest.objects.all()
-            return JsonResponse({ item.id : [item.user.username, item.URL] for item in items})
+            items = MonitorRequest.objects.all().filter(expire_date__gte=timezone.now()).filter(terminated=False)
+            print(type(items))
+            print(len(items))
+            print(timezone.now())
 
-        else: return JsonResponse({'error' : 'Unauthorized'}, status=401)
+        try:
+            return JsonResponse({ item.id : [item.user.username, item.URL] for item in items})
+        except:
+            return JsonResponse({'error' : 'Unauthorized'}, status=401)
+
     else: return JsonResponse({'error': 'Invalid request method'}, status=405)
     
 

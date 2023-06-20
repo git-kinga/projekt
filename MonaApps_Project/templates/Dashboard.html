@@ -1,3 +1,9 @@
+<!-- /*!
+ * Bootstrap  v5.2.3 (https://getbootstrap.com/)
+ * Copyright 2011-2022 The Bootstrap Authors
+ * Copyright 2011-2022 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */ -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,11 +12,24 @@
     <title>Monitoring web-app</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
-    <script src="{% static 'js/bootstrap.js' %}"></script> 
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <style>
+      .pagination {
+        margin-top: 20px;
+      }
+      
+      .page-content {
+        display: none;
+      }
+  
+      .page-content.active {
+        display: block;
+      }
+    </style>
   </head>
   <body>
         <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-          <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">SAMSUNG</a>
+          <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="{% url 'dashboard'%}">SAMSUNG</a>
           <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
