@@ -101,7 +101,7 @@ DATABASES = {
 }
 
 #Token to authenticate influx retrieve of user's tokens
-INFLUXDB_TOKEN = env('INFLUXDB_TOKEN')
+INFLUXDB_AUTH_TOKEN = env('INFLUXDB_AUTH_TOKEN')
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

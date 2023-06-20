@@ -1,8 +1,0 @@
-from(bucket: "valid_metrics")
-  |> range(start: 0)
-  |> filter(fn: (r) => r._measurement == "site_status" and r._field == "status" and r.user_name == "${user}" and r.url == "${url}")
-  |> duplicate(column: "_value", as: "new_column")
-  |> window(every: 30s)
-  |> group(columns: ["new_column", "_start"])
-  |> count()
-  |> group(columns: ["new_column"])
