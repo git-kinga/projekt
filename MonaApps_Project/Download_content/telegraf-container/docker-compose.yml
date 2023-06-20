@@ -11,6 +11,6 @@ services:
     environment:
       - UNIQUE_TOKEN=|>token<|
       - USERNAME=|>agent<|
-      - INFLUX_TOKEN=HERE PASTE CUSTOM INFLUXDB API TOKEN 
+      - INFLUX_TOKEN=  # HERE PASTE CUSTOM INFLUXDB API TOKEN
 
 
