@@ -12,4 +12,5 @@ services:
       - ./defDashboard.json:/etc/grafana/provisioning/dashboards/defDashboard.json
       - ./dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
     environment:
-      - INFLUX_TOKEN=FQtlZROGpHzuhgxwOjIjQBcqP_Xr0dE6QhJ_ohTYj1GQ2LsHjZFKpUGtZiiLNYgmxbafYYrAZjRFq8DtztHTsw==
+    # HERE PASTE IFLUXDB ALL ACCESS API TOKEN
+      - INFLUX_TOKEN=
