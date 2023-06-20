@@ -7,16 +7,22 @@ import sys
 class Agent:
     def __init__(self):
         self.urls = []
-        self.agent_token = os.getenv('UNIQUE_TOKEN')
-        self.agent_name = os.getenv('USERNAME')
-        self.config_pull_url = f"http://host.docker.internal:8000/api/config/{self.agent_name}"
+        self.agent_token = "wGWAGew4DUGaxPQGt5x5bBhfKRjFbsaM"
+        self.agent_name = "user01"
+        self.config_pull_url = f"http://localhost:8000/api/config/{self.agent_name}"
         self.message = "Error while collecting data"
 
     def get_config(self):
+        """Function that connects with api_endpoint to get sites to monitor
+
+        Returns:
+            dictionary: key-value pairs of task id and list of parameters that telegraf need
+        """
+        
         try:
             response = requests.post(self.config_pull_url, headers={'Authorization' : self.agent_token})
         except Exception as error:
-            pass
+            return None
 
         if response.status_code == 200:
             self.urls=json.loads(response.text)
@@ -25,6 +31,14 @@ class Agent:
             return None
 
     def format_string(self, string, *args, **kwargs):
+        """function to format sting that line protocol can read
+
+        Args:
+            string (string): string to format
+
+        Returns:
+            string: formatted string
+        """
         print(string, type(string))
         if type(string) == str:
             print(string.replace(' ', '\\ ').replace(',', '\\,').replace('"', '\\"').replace('=','\\='))
@@ -32,18 +46,23 @@ class Agent:
         return string
         
     def save(self, data):
+        """Function that saves data to file, that telegraf read
+
+        Args:
+            data (dictionary): key-value pairs of task and list of parameters and results
+        """
         measures = []
         if data:
             for ind, (id, values) in enumerate(data.items()):
                 user, url, status = tuple(map(self.format_string, values))
 
-                measures.append(f'site_status,agent_tok="tag-to-replace",user_name="{user}",url="{url}" status="{status}" {time.time_ns()+ind}')
+                measures.append(f'site_status,agent_tok="tag-to-replace",user_name={user},url={url} status={status}i {time.time_ns()+ind}')
 
                 print(measures)
                 
             line_protocol = '\n'.join(measures) + '\n'
             
-            with open('/app/output.txt', "w") as file:
+            with open('output.txt', "w") as file:
                 try:
                     file.write(line_protocol)
                     self.message = "No error"
@@ -66,7 +85,7 @@ class Agent:
             except requests.exceptions.ConnectTimeout:
                 status_code = 504
             except:
-                status_code = 404
+                status_code = 400
             data[id].append(status_code)
             
         self.save(data)

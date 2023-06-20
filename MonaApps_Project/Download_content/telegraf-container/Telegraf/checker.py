@@ -22,7 +22,7 @@ class Agent:
         try:
             response = requests.post(self.config_pull_url, headers={'Authorization' : self.agent_token})
         except Exception as error:
-            pass
+            return None
 
         if response.status_code == 200:
             self.urls=json.loads(response.text)
@@ -56,7 +56,7 @@ class Agent:
             for ind, (id, values) in enumerate(data.items()):
                 user, url, status = tuple(map(self.format_string, values))
 
-                measures.append(f'site_status,agent_tok="tag-to-replace",user_name="{user}",url="{url}" status="{status}" {time.time_ns()+ind}')
+                measures.append(f'site_status,agent_tok="tag-to-replace",user_name={user},url={url} status="{status}" {time.time_ns()+ind}')
 
                 print(measures)
                 
@@ -85,7 +85,7 @@ class Agent:
             except requests.exceptions.ConnectTimeout:
                 status_code = 504
             except:
-                status_code = 404
+                status_code = 400
             data[id].append(status_code)
             
         self.save(data)

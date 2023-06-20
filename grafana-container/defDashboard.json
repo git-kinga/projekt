@@ -1,0 +1,183 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P5697886F9CA74929"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "red",
+            "mode": "shades"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_value 200"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P5697886F9CA74929"
+          },
+          "query": "from(bucket: \"valid_metrics\")\r\n  |> range(start: 0)\r\n  |> filter(fn: (r) => r._measurement == \"site_status\" and r._field == \"status\" and r.user_name == \"${user}\" and r.url == \"${url}\")\r\n  |> duplicate(column: \"_value\", as: \"new_column\")\r\n  |> window(every: 30s)\r\n  |> group(columns: [\"new_column\", \"_start\"])\r\n  |> count()\r\n  |> group(columns: [\"new_column\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "${user}'s Monitoring Site - ${url}",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "https://eportal.pwr.edu.pl/",
+          "value": "https://eportal.pwr.edu.pl/"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "P5697886F9CA74929"
+        },
+        "definition": "from(bucket: \"valid_metrics\")\r\n  |> range(start: 0)\r\n  |> filter(fn: (r) => r._measurement == \"site_status\" and r._field == \"status\" and r.user_name == \"${user}\")\r\n  |> group(columns: [\"url\"])\r\n  |> distinct(column: \"url\")\r\n  |> map(fn: (r) => ({_value: r.url}))",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Site URL",
+        "multi": false,
+        "name": "url",
+        "options": [],
+        "query": "from(bucket: \"valid_metrics\")\r\n  |> range(start: 0)\r\n  |> filter(fn: (r) => r._measurement == \"site_status\" and r._field == \"status\" and r.user_name == \"${user}\")\r\n  |> group(columns: [\"url\"])\r\n  |> distinct(column: \"url\")\r\n  |> map(fn: (r) => ({_value: r.url}))",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "hide": 2,
+        "label": "User\\username",
+        "name": "user",
+        "query": "admin",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Monitoring Site DashBoard",
+  "uid": "dc50118d-16cf-4d6b-8929-82fabd914b32",
+  "version": 5,
+  "weekStart": ""
+}

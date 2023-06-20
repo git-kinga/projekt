@@ -25,12 +25,13 @@ class Sender():
         """
         try:
             response = requests.post(self.url, headers={'Authorization' : token})
+            return json.loads(response.text)
         except Exception as e:
             print(e)
             print('Getting users token')
-            response = {}
+            return None
             
-        return json.loads(response.text)
+        
     
     def format_dict(self, data: dict) -> str:
         """Creating a line protocol ready to send with information of usernames and theirs tokens
@@ -42,7 +43,7 @@ class Sender():
             str: line protocol ready to send
         """
         timestamp = time.time_ns()
-        return '\n'.join([f'agent_tokens,agent_name="{user}" agent_tok="{token}" {timestamp+ind}' 
+        return '\n'.join([f'agent_tokens,agent_name={user} agent_tok="{token}" {timestamp+ind}' 
                           for ind, (user, token) in enumerate(data.items())])
     
     def send_tokens(self, line_protocol):
@@ -57,7 +58,7 @@ class Sender():
                 with client.write_api() as writer:
                     writer.write(bucket=self.bucket, org='my-org', record=line_protocol)
                     print("DATA_SENT")
-
+                    
         else: print("There is no new data to send")
         
     def get_existing_data(self):

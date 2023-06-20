@@ -23,7 +23,7 @@ def login(request):
             password = form.cleaned_data['password']
             remember_me = form.cleaned_data['remember_me']
             user = authenticate(request, username=username, password=password)
-            if user is not None:
+            if user:
                 auth_login(request, user)
                 print("### User logged ###")
                 if not remember_me:
@@ -31,6 +31,8 @@ def login(request):
                 return redirect('/dashboard')
             else:
                 # print("UserNone")
+                print("inside else")
+                messages.error(request, 'Invalid username or password.', extra_tags='alert alert-danger')
                 for field in form.errors:
                     print("UserNone")
                     for error in form.errors[field]:
