@@ -1,5 +1,5 @@
 To setup an InfluxDB:
-- create buckets: "valid_metrics" and "telegraf_data_agent"
+- create buckets: "valid_metrics" and "telegraf_agent_data"
 - create api tokens:
   - one token for all access 
     - copy influx all access token and paste it to Influx/api_keys.txt
